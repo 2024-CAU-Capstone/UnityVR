@@ -1,0 +1,12 @@
+D:\Development_Repository\Capstone\WindowsFormsApp\bin\Debug\WindowsFormsApp.exe.config
+D:\Development_Repository\Capstone\WindowsFormsApp\bin\Debug\WindowsFormsApp.exe
+D:\Development_Repository\Capstone\WindowsFormsApp\bin\Debug\WindowsFormsApp.pdb
+D:\Development_Repository\Capstone\WindowsFormsApp\obj\Debug\WindowsFormsApp.csproj.AssemblyReference.cache
+D:\Development_Repository\Capstone\WindowsFormsApp\obj\Debug\WindowsFormsApp.Schedule.resources
+D:\Development_Repository\Capstone\WindowsFormsApp\obj\Debug\WindowsFormsApp.StartUI.resources
+D:\Development_Repository\Capstone\WindowsFormsApp\obj\Debug\WindowsFormsApp.Properties.Resources.resources
+D:\Development_Repository\Capstone\WindowsFormsApp\obj\Debug\WindowsFormsApp.csproj.GenerateResource.cache
+D:\Development_Repository\Capstone\WindowsFormsApp\obj\Debug\WindowsFormsApp.csproj.CoreCompileInputs.cache
+D:\Development_Repository\Capstone\WindowsFormsApp\obj\Debug\WindowsFormsApp.exe
+D:\Development_Repository\Capstone\WindowsFormsApp\obj\Debug\WindowsFormsApp.pdb
+D:\Development_Repository\Capstone\WindowsFormsApp\obj\Debug\WindowsFormsApp.csproj.ResolveComReference.cache
