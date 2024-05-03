@@ -12,9 +12,40 @@ namespace WindowsFormsApp
 {
     public partial class ProgramPopUp : Form
     {
-        public ProgramPopUp()
+        private Schedule schedule;
+
+        public ProgramPopUp(Schedule schedule)
         {
             InitializeComponent();
+            this.schedule = schedule;
+            InitPopUp();           
+        }
+        private void InitPopUp()
+        {           
+            GetProgramList();
+            checkedListBox1.Items.Add("Link example A");
+            checkedListBox1.Items.Add("Link example B");
+        }
+        private void GetProgramList()
+        {
+            //프로그램 목록을 받아오는 코드 추가 필요
+        }
+
+        private void CompleteButton_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox1.CheckedItems.Count; i++)
+            {
+                if (checkedListBox1.GetItemChecked(i))
+                {
+                    //schedule.AddLink(checkedListBox1.CheckedItems[i].ToString());
+                }
+            }
+            Close();
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

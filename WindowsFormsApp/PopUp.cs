@@ -12,9 +12,68 @@ namespace WindowsFormsApp
 {
     public partial class PopUp : Form
     {
-        public PopUp()
+        private Memo memo;
+        private Schedule schedule;
+        private int type;
+
+        public PopUp(Memo memo)
         {
             InitializeComponent();
+            this.memo = memo;
+            type = 0;
+            InitPopUp();
+        }
+        public PopUp(Schedule schedule)
+        {
+            InitializeComponent();
+            this.schedule = schedule;
+            type = 1;
+            InitPopUp();
+        }
+
+        private void InitPopUp()
+        {
+            GetLinkList();
+            checkedListBox1.Items.Add("Link example A");
+            checkedListBox1.Items.Add("Link example B");
+        }
+
+        protected void GetLinkList()
+        {
+            //링크 목록을 받아오는 코드 추가 필요
+        }
+
+        private void CompleteButton_Click(object sender, EventArgs e)
+        {
+            if(type == 1)
+            {
+                for (int i = 0; i < checkedListBox1.CheckedItems.Count; i++)
+                {
+                    if (checkedListBox1.GetItemChecked(i))
+                    {
+                        memo.AddLink(checkedListBox1.CheckedItems[i].ToString());
+                    }
+                }
+                memo.ShowLink();
+            }
+            else
+            {
+                for (int i = 0; i < checkedListBox1.CheckedItems.Count; i++)
+                {
+                    if (checkedListBox1.GetItemChecked(i))
+                    {
+                        schedule.AddLink(checkedListBox1.CheckedItems[i].ToString());
+                    }
+                }
+                schedule.ShowLink();
+            }
+           
+            Close();
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
