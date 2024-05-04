@@ -25,6 +25,7 @@ namespace WindowsFormsApp
             InitializeComponent();
             this.startUI = startUI;
             InitMemo();
+            InitComboBox();
         }
 
         private void InitMemo()
@@ -36,6 +37,7 @@ namespace WindowsFormsApp
             fileFullPath = "no file";
             MakeCheckBox();
         }
+        #region public method
         public void InitMemo(Schedule saveSchedule)
         {
             detail = saveSchedule.detail;
@@ -56,7 +58,13 @@ namespace WindowsFormsApp
             }
             LinkPopUpButton.Text += LinkList[LinkList.Count - 1];
         }
-
+        #endregion
+        private void InitComboBox()
+        {
+            comboBox.Items.Add("5분 전");
+            comboBox.Items.Add("10분 전");
+            comboBox.Items.Add("30분 전");
+        }
         private void MakeCheckBox()
         {
             Screen[] screens = Screen.AllScreens;
@@ -115,6 +123,22 @@ namespace WindowsFormsApp
                 fileFullPath = openFileDialog.FileName;
                 fileName.Text = file;
             }
+        }
+
+        private void ApplicationButton_Click(object sender, EventArgs e)
+        {
+            ProgramPopUp programPopUp = new ProgramPopUp(this);
+            programPopUp.Show();
+        }
+
+        private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

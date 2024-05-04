@@ -41,8 +41,8 @@ namespace WindowsFormsApp
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ApplicationButton = new System.Windows.Forms.Button();
+            this.comboBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -153,22 +153,24 @@ namespace WindowsFormsApp
             this.label6.TabIndex = 20;
             this.label6.Text = "어플리케이션 지정 : ";
             // 
-            // button1
+            // ApplicationButton
             // 
-            this.button1.Location = new System.Drawing.Point(235, 283);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(127, 35);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "앱 선택";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ApplicationButton.Location = new System.Drawing.Point(235, 283);
+            this.ApplicationButton.Name = "ApplicationButton";
+            this.ApplicationButton.Size = new System.Drawing.Size(127, 35);
+            this.ApplicationButton.TabIndex = 21;
+            this.ApplicationButton.Text = "앱 선택";
+            this.ApplicationButton.UseVisualStyleBackColor = true;
+            this.ApplicationButton.Click += new System.EventHandler(this.ApplicationButton_Click);
             // 
-            // comboBox1
+            // comboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(628, 86);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(102, 20);
-            this.comboBox1.TabIndex = 23;
+            this.comboBox.FormattingEnabled = true;
+            this.comboBox.Location = new System.Drawing.Point(628, 86);
+            this.comboBox.Name = "comboBox";
+            this.comboBox.Size = new System.Drawing.Size(102, 20);
+            this.comboBox.TabIndex = 23;
+            this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -196,6 +198,7 @@ namespace WindowsFormsApp
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 21);
             this.textBox1.TabIndex = 26;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Schedule
             // 
@@ -203,8 +206,8 @@ namespace WindowsFormsApp
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.comboBox);
+            this.Controls.Add(this.ApplicationButton);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.fileName);
             this.Controls.Add(this.label5);
@@ -235,8 +238,8 @@ namespace WindowsFormsApp
         private Label label2;
         private Label label1;
         private Label label6;
-        private Button button1;
-        private ComboBox comboBox1;
+        private Button ApplicationButton;
+        private ComboBox comboBox;
         private Label label8;
         private Label label9;
         private TextBox textBox1;
