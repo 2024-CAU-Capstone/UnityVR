@@ -17,6 +17,7 @@ namespace WindowsFormsApp
         private string detail;
         private string file;
         private string fileFullPath;
+        private string time;
 
         private List<string> LinkList;
         private List<Image> ScreenShotList;
@@ -138,7 +139,7 @@ namespace WindowsFormsApp
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            time = textBox1.Text;
         }
     }
 }

@@ -30,11 +30,11 @@
         {
             this.YesterdayButton = new System.Windows.Forms.Button();
             this.NextdayButton = new System.Windows.Forms.Button();
-            this.DateselectButton = new System.Windows.Forms.Button();
             this.MakeMemoButton = new System.Windows.Forms.Button();
             this.MakeScheduleButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // YesterdayButton
@@ -42,7 +42,7 @@
             this.YesterdayButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.YesterdayButton.BackgroundImage = global::WindowsFormsApp.Properties.Resources.LeftArrow;
             this.YesterdayButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.YesterdayButton.Location = new System.Drawing.Point(12, 11);
+            this.YesterdayButton.Location = new System.Drawing.Point(16, 12);
             this.YesterdayButton.Name = "YesterdayButton";
             this.YesterdayButton.Size = new System.Drawing.Size(34, 34);
             this.YesterdayButton.TabIndex = 0;
@@ -54,22 +54,12 @@
             this.NextdayButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.NextdayButton.BackgroundImage = global::WindowsFormsApp.Properties.Resources.RightArrow;
             this.NextdayButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.NextdayButton.Location = new System.Drawing.Point(156, 11);
+            this.NextdayButton.Location = new System.Drawing.Point(262, 12);
             this.NextdayButton.Name = "NextdayButton";
             this.NextdayButton.Size = new System.Drawing.Size(34, 33);
             this.NextdayButton.TabIndex = 1;
             this.NextdayButton.UseVisualStyleBackColor = true;
             this.NextdayButton.Click += new System.EventHandler(this.NextdayButton_Click);
-            // 
-            // DateselectButton
-            // 
-            this.DateselectButton.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.DateselectButton.Location = new System.Drawing.Point(49, 11);
-            this.DateselectButton.Name = "DateselectButton";
-            this.DateselectButton.Size = new System.Drawing.Size(101, 33);
-            this.DateselectButton.TabIndex = 2;
-            this.DateselectButton.Text = "24/04/09";
-            this.DateselectButton.UseVisualStyleBackColor = true;
             // 
             // MakeMemoButton
             // 
@@ -111,16 +101,24 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "일정";
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(56, 18);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 21);
+            this.dateTimePicker1.TabIndex = 8;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
             // StartUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MakeScheduleButton);
             this.Controls.Add(this.MakeMemoButton);
-            this.Controls.Add(this.DateselectButton);
             this.Controls.Add(this.NextdayButton);
             this.Controls.Add(this.YesterdayButton);
             this.Name = "StartUI";
@@ -135,11 +133,11 @@
 
         private System.Windows.Forms.Button YesterdayButton;
         private System.Windows.Forms.Button NextdayButton;
-        private System.Windows.Forms.Button DateselectButton;
         private System.Windows.Forms.Button MakeMemoButton;
         private System.Windows.Forms.Button MakeScheduleButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }
 

@@ -34,7 +34,6 @@ namespace WindowsFormsApp
             MemoList = new List<Memo>();
             ScheduleList = new List<Schedule>();
             date = DateTime.Now;
-            DateselectButton.Text = date.ToString("yy/MM/dd");
             LoadMemoAndSchedule(date);
         }
 
@@ -134,7 +133,7 @@ namespace WindowsFormsApp
         {
             //다음 날짜로 이동
             date = date.AddDays(1);
-            DateselectButton.Text = date.ToString("yy/MM/dd");
+            dateTimePicker1.Value = date;
             LoadMemoAndSchedule(date);
         }
 
@@ -142,7 +141,7 @@ namespace WindowsFormsApp
         {
             //이전 날짜로 이동
             date = date.AddDays(-1);
-            DateselectButton.Text = date.ToString("yy/MM/dd");
+            dateTimePicker1.Value = date;
             LoadMemoAndSchedule(date);
         }
 
@@ -156,7 +155,10 @@ namespace WindowsFormsApp
             //MemoList와 ScheduleList를 저장
         }
 
-
-        
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            date = dateTimePicker1.Value;
+            LoadMemoAndSchedule(date);
+        }
     }
 }
