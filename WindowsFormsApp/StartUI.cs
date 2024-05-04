@@ -15,11 +15,16 @@ namespace WindowsFormsApp
         private List<Memo> MemoList;
         private List<Schedule> ScheduleList;
         private DateTime date;
+        KeyboardHook hook;
 
         public StartUI()
         {
             InitializeComponent();
             InitStartUI();
+            hook = new KeyboardHook();
+            hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
+            hook.RegisterHotKey(WindowsFormsApp.ModifierKeys.Control | WindowsFormsApp.ModifierKeys.Alt, Keys.F12);
+            hook.RegisterHotKey(WindowsFormsApp.ModifierKeys.Control | WindowsFormsApp.ModifierKeys.Alt, Keys.F11);
         }
         #region public method
         public void AddMemo(Memo memo)
@@ -163,5 +168,22 @@ namespace WindowsFormsApp
         {
 
         }
+
+        #region Keyboard Shortcut Definition
+        void hook_KeyPressed(object sender, KeyPressedEventArgs e)
+        {
+            if (e.Key.ToString() == "F11")
+            {
+                Memo memo = new Memo(this);
+                memo.Show();
+            }
+            else if (e.Key.ToString() == "F12")
+            {
+                Schedule schedule = new Schedule(this);
+                schedule.Show();
+            }
+            //label1.Text = e.Modifier.ToString() + " + " + e.Key.ToString();
+        }
+        #endregion
     }
 }
