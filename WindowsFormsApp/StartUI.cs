@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -9,6 +10,8 @@ namespace WindowsFormsApp
 {
     public partial class StartUI : Form
     {
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         private List<Memo> MemoList;
         private List<Schedule> ScheduleList;
         private DateTime date;
@@ -156,7 +159,9 @@ namespace WindowsFormsApp
             //MemoList와 ScheduleList를 저장
         }
 
+        private void StartUI_Load(object sender, EventArgs e)
+        {
 
-        
+        }
     }
 }

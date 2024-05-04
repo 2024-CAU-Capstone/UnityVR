@@ -42,9 +42,10 @@
             this.YesterdayButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.YesterdayButton.BackgroundImage = global::WindowsFormsApp.Properties.Resources.LeftArrow;
             this.YesterdayButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.YesterdayButton.Location = new System.Drawing.Point(12, 11);
+            this.YesterdayButton.Location = new System.Drawing.Point(15, 18);
+            this.YesterdayButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.YesterdayButton.Name = "YesterdayButton";
-            this.YesterdayButton.Size = new System.Drawing.Size(34, 34);
+            this.YesterdayButton.Size = new System.Drawing.Size(44, 57);
             this.YesterdayButton.TabIndex = 0;
             this.YesterdayButton.UseVisualStyleBackColor = true;
             this.YesterdayButton.Click += new System.EventHandler(this.YesterdayButton_Click);
@@ -54,28 +55,31 @@
             this.NextdayButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.NextdayButton.BackgroundImage = global::WindowsFormsApp.Properties.Resources.RightArrow;
             this.NextdayButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.NextdayButton.Location = new System.Drawing.Point(156, 11);
+            this.NextdayButton.Location = new System.Drawing.Point(201, 18);
+            this.NextdayButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.NextdayButton.Name = "NextdayButton";
-            this.NextdayButton.Size = new System.Drawing.Size(34, 33);
+            this.NextdayButton.Size = new System.Drawing.Size(44, 55);
             this.NextdayButton.TabIndex = 1;
             this.NextdayButton.UseVisualStyleBackColor = true;
             this.NextdayButton.Click += new System.EventHandler(this.NextdayButton_Click);
             // 
             // DateselectButton
             // 
-            this.DateselectButton.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.DateselectButton.Location = new System.Drawing.Point(49, 11);
+            this.DateselectButton.Font = new System.Drawing.Font("Gulim", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DateselectButton.Location = new System.Drawing.Point(63, 18);
+            this.DateselectButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.DateselectButton.Name = "DateselectButton";
-            this.DateselectButton.Size = new System.Drawing.Size(101, 33);
+            this.DateselectButton.Size = new System.Drawing.Size(130, 55);
             this.DateselectButton.TabIndex = 2;
             this.DateselectButton.Text = "24/04/09";
             this.DateselectButton.UseVisualStyleBackColor = true;
             // 
             // MakeMemoButton
             // 
-            this.MakeMemoButton.Location = new System.Drawing.Point(692, 12);
+            this.MakeMemoButton.Location = new System.Drawing.Point(890, 20);
+            this.MakeMemoButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MakeMemoButton.Name = "MakeMemoButton";
-            this.MakeMemoButton.Size = new System.Drawing.Size(96, 33);
+            this.MakeMemoButton.Size = new System.Drawing.Size(123, 55);
             this.MakeMemoButton.TabIndex = 4;
             this.MakeMemoButton.Text = "메모 만들기";
             this.MakeMemoButton.UseVisualStyleBackColor = true;
@@ -83,9 +87,10 @@
             // 
             // MakeScheduleButton
             // 
-            this.MakeScheduleButton.Location = new System.Drawing.Point(692, 67);
+            this.MakeScheduleButton.Location = new System.Drawing.Point(890, 112);
+            this.MakeScheduleButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MakeScheduleButton.Name = "MakeScheduleButton";
-            this.MakeScheduleButton.Size = new System.Drawing.Size(96, 33);
+            this.MakeScheduleButton.Size = new System.Drawing.Size(123, 55);
             this.MakeScheduleButton.TabIndex = 5;
             this.MakeScheduleButton.Text = "일정 만들기";
             this.MakeScheduleButton.UseVisualStyleBackColor = true;
@@ -94,28 +99,30 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("굴림", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(369, 84);
+            this.label1.Font = new System.Drawing.Font("Gulim", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.Location = new System.Drawing.Point(474, 140);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 19);
+            this.label1.Size = new System.Drawing.Size(168, 29);
             this.label1.TabIndex = 6;
             this.label1.Text = "미정리 메모";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("굴림", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(12, 84);
+            this.label2.Font = new System.Drawing.Font("Gulim", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.Location = new System.Drawing.Point(15, 140);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 19);
+            this.label2.Size = new System.Drawing.Size(71, 29);
             this.label2.TabIndex = 7;
             this.label2.Text = "일정";
             // 
             // StartUI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1029, 750);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MakeScheduleButton);
@@ -123,9 +130,11 @@
             this.Controls.Add(this.DateselectButton);
             this.Controls.Add(this.NextdayButton);
             this.Controls.Add(this.YesterdayButton);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "StartUI";
             this.Text = "Memo";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ExitProgram);
+            this.Load += new System.EventHandler(this.StartUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
