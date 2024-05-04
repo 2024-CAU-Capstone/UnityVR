@@ -42,7 +42,6 @@ namespace WindowsFormsApp
             MemoList = new List<Memo>();
             ScheduleList = new List<Schedule>();
             date = DateTime.Now;
-            DateselectButton.Text = date.ToString("yy/MM/dd");
             LoadMemoAndSchedule(date);
         }
 
@@ -142,7 +141,7 @@ namespace WindowsFormsApp
         {
             //다음 날짜로 이동
             date = date.AddDays(1);
-            DateselectButton.Text = date.ToString("yy/MM/dd");
+            dateTimePicker1.Value = date;
             LoadMemoAndSchedule(date);
         }
 
@@ -150,7 +149,7 @@ namespace WindowsFormsApp
         {
             //이전 날짜로 이동
             date = date.AddDays(-1);
-            DateselectButton.Text = date.ToString("yy/MM/dd");
+            dateTimePicker1.Value = date;
             LoadMemoAndSchedule(date);
         }
 
@@ -167,6 +166,11 @@ namespace WindowsFormsApp
         private void StartUI_Load(object sender, EventArgs e)
         {
 
+        }
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            date = dateTimePicker1.Value;
+            LoadMemoAndSchedule(date);
         }
 
         #region Keyboard Shortcut Definition
@@ -185,5 +189,6 @@ namespace WindowsFormsApp
             //label1.Text = e.Modifier.ToString() + " + " + e.Key.ToString();
         }
         #endregion
+
     }
 }

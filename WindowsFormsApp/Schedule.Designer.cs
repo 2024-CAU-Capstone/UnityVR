@@ -51,7 +51,7 @@ namespace WindowsFormsApp
             // fileName
             // 
             this.fileName.AutoSize = true;
-            this.fileName.Location = new System.Drawing.Point(208, 195);
+            this.fileName.Location = new System.Drawing.Point(285, 211);
             this.fileName.Name = "fileName";
             this.fileName.Size = new System.Drawing.Size(0, 12);
             this.fileName.TabIndex = 19;
@@ -78,7 +78,7 @@ namespace WindowsFormsApp
             // 
             // FilePopUPButton
             // 
-            this.FilePopUPButton.Location = new System.Drawing.Point(151, 196);
+            this.FilePopUPButton.Location = new System.Drawing.Point(152, 200);
             this.FilePopUPButton.Name = "FilePopUPButton";
             this.FilePopUPButton.Size = new System.Drawing.Size(127, 35);
             this.FilePopUPButton.TabIndex = 16;
