@@ -1,0 +1,6 @@
+﻿RegisterHotKey
+UnregisterHotKey
+ShowWindow
+WM_HOTKEY
+SetWindowDisplayAffinity
+EnumDisplayMonitors

@@ -5,13 +5,15 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using Windows.Win32.UI.Input.KeyboardAndMouse;
+using Windows.Win32.UI.WindowsAndMessaging;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 
 namespace WindowsFormsApp
 {
     public partial class StartUI : Form
     {
-        [DllImport("user32.dll")]
-        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
         private List<Memo> MemoList;
         private List<Schedule> ScheduleList;
         private DateTime date;
@@ -23,8 +25,8 @@ namespace WindowsFormsApp
             InitStartUI();
             hook = new KeyboardHook();
             hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
-            hook.RegisterHotKey(WindowsFormsApp.ModifierKeys.Control | WindowsFormsApp.ModifierKeys.Alt, Keys.F12);
-            hook.RegisterHotKey(WindowsFormsApp.ModifierKeys.Control | WindowsFormsApp.ModifierKeys.Alt, Keys.F11);
+            hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F12);
+            hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F11);
         }
         #region public method
         public void AddMemo(Memo memo)
@@ -176,19 +178,18 @@ namespace WindowsFormsApp
         #region Keyboard Shortcut Definition
         void hook_KeyPressed(object sender, KeyPressedEventArgs e)
         {
-            if (e.Key.ToString() == "F11")
+            if (e.Key == (uint)Keys.F11)
             {
                 Memo memo = new Memo(this);
                 memo.Show();
+                PInvoke.ShowWindow(new HWND(this.Handle), SHOW_WINDOW_CMD.SW_MINIMIZE);
             }
             else if (e.Key.ToString() == "F12")
             {
                 Schedule schedule = new Schedule(this);
                 schedule.Show();
             }
-            //label1.Text = e.Modifier.ToString() + " + " + e.Key.ToString();
         }
         #endregion
-
     }
 }
