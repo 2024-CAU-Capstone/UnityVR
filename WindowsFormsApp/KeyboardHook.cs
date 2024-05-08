@@ -5,21 +5,16 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows.Win32;
+using Windows.Win32.UI.Input.KeyboardAndMouse;
+using Windows.Win32.Foundation;
 
 namespace WindowsFormsApp
 {
     internal sealed class KeyboardHook : IDisposable
     {
-        [DllImport("user32.dll")]
-        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
-
-        [DllImport("user32.dll")]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-
         private class Window : NativeWindow, IDisposable
         {
-            private static int WM_HOTKEY = 0x0312;
-
             public Window()
             {
                 this.CreateHandle(new CreateParams());
@@ -28,10 +23,10 @@ namespace WindowsFormsApp
             protected override void WndProc(ref Message m)
             {
                 base.WndProc(ref m);
-                if (m.Msg == WM_HOTKEY)
+                if (m.Msg == PInvoke.WM_HOTKEY)
                 {
-                    Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
-                    ModifierKeys modifier = (ModifierKeys)((int)m.LParam & 0xFFFF);
+                    uint key = ((uint)m.LParam >> 16) & 0xFFFF;
+                    HOT_KEY_MODIFIERS modifier = (HOT_KEY_MODIFIERS)((uint)m.LParam & 0xFFFF);
                     if (KeyPressed != null)
                         KeyPressed(this, new KeyPressedEventArgs(modifier, key));
                 }
@@ -52,10 +47,10 @@ namespace WindowsFormsApp
                     KeyPressed(this, args);
             };
         }
-        public void RegisterHotKey(ModifierKeys modifier, Keys key)
+        public void RegisterHotKey(HOT_KEY_MODIFIERS modifier, uint key)
         {
             _currentId = _currentId + 1;
-            if (!RegisterHotKey(_window.Handle, _currentId, (uint)modifier, (uint)key))
+            if (!PInvoke.RegisterHotKey(new HWND(_window.Handle), _currentId, modifier, key))
                 throw new InvalidOperationException("Couldn't register the hotkey.");
         }
 
@@ -64,40 +59,30 @@ namespace WindowsFormsApp
         {
             for (int i = _currentId; i > 0; i--)
             {
-                UnregisterHotKey(_window.Handle, i);
+                PInvoke.UnregisterHotKey(new HWND(_window.Handle), i);
             }
             _window.Dispose();
         }
     }
     public class KeyPressedEventArgs : EventArgs
     {
-        private ModifierKeys _modifier;
-        private Keys _key;
+        private HOT_KEY_MODIFIERS _modifier;
+        private uint _key;
 
-        internal KeyPressedEventArgs(ModifierKeys modifier, Keys key)
+        internal KeyPressedEventArgs(HOT_KEY_MODIFIERS modifier, uint key)
         {
             _modifier = modifier;
             _key = key;
         }
 
-        public ModifierKeys Modifier
+        public HOT_KEY_MODIFIERS Modifier
         {
             get { return _modifier; }
         }
 
-        public Keys Key
+        public uint Key
         {
             get { return _key; }
         }
-    }
-
-    [Flags]
-    public enum ModifierKeys : uint
-    {
-        None = 0,
-        Alt = 1,
-        Control = 2,
-        Shift = 4,
-        Win = 8
     }
 }
