@@ -2,63 +2,84 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace WindowsFormsApp
 {
     public partial class Schedule : Form
     {
         private StartUI startUI;
+        private bool IsMake;
 
-        private string detail;
-        private string file;
-        private string fileFullPath;
-        private string time;
-
+        public string detail;
+        public string file;
+        public string fileFullPath;
+        public string time;
+        public string alarmTime;
+        
         private List<string> LinkList;
+        private List<string> ProgramList;
         private List<Image> ScreenShotList;
+
+        private DateTime ScheduleTime;
         public Schedule(StartUI startUI)
         {
             InitializeComponent();
             this.startUI = startUI;
-            InitMemo();
+            InitSchedule();
             InitComboBox();
         }
 
-        private void InitMemo()
+        private void InitSchedule()
         {
             ScreenShotList = new List<Image>();
             LinkList = new List<string>();
+            ProgramList = new List<string>();
             detail = "no detail";
             file = "no file";
             fileFullPath = "no file";
+            ScheduleTime = startUI.GetDate();
             MakeCheckBox();
+            IsMake = true;
         }
         #region public method
-        public void InitMemo(Schedule saveSchedule)
+        public void InitSchedule(Schedule saveSchedule)
         {
             detail = saveSchedule.detail;
             file = saveSchedule.file;
             fileFullPath = saveSchedule.fileFullPath;
             LinkList = saveSchedule.LinkList;
             ScreenShotList = saveSchedule.ScreenShotList;
+            alarmTime = saveSchedule.alarmTime;
+            time = saveSchedule.time;
+            IsMake = false;
+            /////////////////////////////
+            ShowLink();
             ContentText.Text = detail;
+            comboBox.Text = alarmTime;
+            textBox1.Text = time;
             fileName.Text = file;
+            ScheduleTime = saveSchedule.ScheduleTime;
         }
         public void AddLink(string link) => LinkList.Add(link);
+        public void AddProgram(string program) => ProgramList.Add(program);
 
         public void ShowLink()
         {
-            for (int i = 0; i < LinkList.Count - 1; i++)
+            for (int i = 0; i < LinkList.Count; i++)
             {
-                LinkPopUpButton.Text += LinkList[i] + " and ";
+                LinkPopUpButton.Text += LinkList[i] + "  ";
             }
-            LinkPopUpButton.Text += LinkList[LinkList.Count - 1];
         }
+
+        public DateTime GetScheduleTime() => ScheduleTime;
+
         #endregion
         private void InitComboBox()
         {
@@ -81,6 +102,7 @@ namespace WindowsFormsApp
 
         private void TakeScreenShot()
         {
+            /*
             Screen[] screens = Screen.AllScreens;
             for (int i = 0; i < screens.Length; i++)
             {
@@ -93,13 +115,19 @@ namespace WindowsFormsApp
                 graphics.Dispose();
                 ScreenShotList.Add(img);
             }
+            */
         }
 
         private void CompletedButton_Click(object sender, EventArgs e)
         {
             //작성 완료 버튼 - test ver
-            detail = ContentText.Text;
-            startUI.AddSchedule(this);
+            Debug.WriteLine(IsMake);
+            if (IsMake)
+            {
+                detail = ContentText.Text;
+                startUI.AddSchedule(this);
+                startUI.LoadMemoAndSchedule(startUI.GetDate());
+            }         
             Close();
         }
 
@@ -134,7 +162,7 @@ namespace WindowsFormsApp
 
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            alarmTime = comboBox.SelectedItem.ToString();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

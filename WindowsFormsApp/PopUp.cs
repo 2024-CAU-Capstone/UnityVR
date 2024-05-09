@@ -14,20 +14,20 @@ namespace WindowsFormsApp
     {
         private Memo memo;
         private Schedule schedule;
-        private int type;
+        private bool IsSchedule;
 
         public PopUp(Memo memo)
         {
             InitializeComponent();
             this.memo = memo;
-            type = 0;
+            IsSchedule = false;
             InitPopUp();
         }
         public PopUp(Schedule schedule)
         {
             InitializeComponent();
             this.schedule = schedule;
-            type = 1;
+            IsSchedule = true;
             InitPopUp();
         }
 
@@ -45,7 +45,7 @@ namespace WindowsFormsApp
 
         private void CompleteButton_Click(object sender, EventArgs e)
         {
-            if(type == 1)
+            if(!IsSchedule)
             {
                 for (int i = 0; i < checkedListBox1.CheckedItems.Count; i++)
                 {

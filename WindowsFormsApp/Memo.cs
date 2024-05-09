@@ -7,22 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace WindowsFormsApp
 {
     public partial class Memo : Form
     {
         private StartUI startUI;
+        private bool IsMake;
 
-        private string detail;
-        private string file;
-        private string fileFullPath;
+        public string detail;
+        public string file;
+        public string fileFullPath;
 
         private List<string> LinkList;
+        private List<string> ProgramList;
         private List<Image> ScreenShotList;
+
+        private DateTime MemoTime;
         public Memo(StartUI startUI)
-        {           
+        {
             InitializeComponent();
             this.startUI = startUI;
             InitMemo();
@@ -32,10 +38,13 @@ namespace WindowsFormsApp
         {
             ScreenShotList = new List<Image>();
             LinkList = new List<string>();
+            ProgramList = new List<string>();
             detail = "no detail";
             file = "no file";
             fileFullPath = "no file";
+            MemoTime = startUI.GetDate();
             MakeCheckBox();
+            IsMake = true;
         }
         public void InitMemo(Memo savedmemo)
         {
@@ -44,18 +53,23 @@ namespace WindowsFormsApp
             fileFullPath = savedmemo.fileFullPath;
             LinkList = savedmemo.LinkList;
             ScreenShotList = savedmemo.ScreenShotList;
+            MemoTime = savedmemo.MemoTime;
+            IsMake = false;
+            /////////////////////////////
+            ShowLink();
             ContentText.Text = detail;
             fileName.Text = file;
+            
         }
         public void AddLink(string link) => LinkList.Add(link);
-
+        public void AddProgram(string program) => ProgramList.Add(program);
+        public DateTime GetMemoTime() => MemoTime;
         public void ShowLink()
         {
-            for (int i = 0; i < LinkList.Count - 1; i++)
+            for (int i = 0; i < LinkList.Count; i++)
             {
-                LinkPopUpButton.Text += LinkList[i] + " and ";
+                LinkPopUpButton.Text += LinkList[i] + "  ";
             }
-            LinkPopUpButton.Text += LinkList[LinkList.Count - 1];
         }
 
         private void MakeCheckBox()
@@ -65,7 +79,7 @@ namespace WindowsFormsApp
             {
                 CheckBox screenCheckBox = new CheckBox();
                 screenCheckBox.Text = "Screen " + (i + 1);
-                screenCheckBox.Location = new Point(130 + i * 150, 110);
+                screenCheckBox.Location = new Point(130 + i * 150, 135);
                 screenCheckBox.Size = new Size(100, 30);
                 this.Controls.Add(screenCheckBox);
             }
@@ -73,6 +87,7 @@ namespace WindowsFormsApp
 
         private void TakeScreenShot()
         {
+            /*
             Screen[] screens = Screen.AllScreens;
             for (int i = 0; i < screens.Length; i++)
             {
@@ -85,13 +100,18 @@ namespace WindowsFormsApp
                 graphics.Dispose();
                 ScreenShotList.Add(img);
             }
+            */
         }
 
         private void CompletedButton_Click(object sender, EventArgs e)
         {
             //작성 완료 버튼 - test ver
-            detail = ContentText.Text;
-            startUI.AddMemo(this);
+            if (IsMake)
+            {
+                detail = ContentText.Text;
+                startUI.AddMemo(this);
+                startUI.LoadMemoAndSchedule(startUI.GetDate());
+            }         
             Close();
         }
 
@@ -116,6 +136,12 @@ namespace WindowsFormsApp
                 fileFullPath = openFileDialog.FileName;
                 fileName.Text = file;
             }
+        }
+
+        private void ApplicationButton_Click(object sender, EventArgs e)
+        {
+            ProgramPopUp programPopUp = new ProgramPopUp(this);
+            programPopUp.Show();
         }
     }
 }
