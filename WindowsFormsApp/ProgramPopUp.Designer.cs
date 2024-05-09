@@ -28,63 +28,67 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
-            this.CancelButton = new System.Windows.Forms.Button();
-            this.CompleteButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            checkedListBox1 = new CheckedListBox();
+            CancelButton = new Button();
+            CompleteButton = new Button();
+            label1 = new Label();
+            SuspendLayout();
             // 
             // checkedListBox1
             // 
-            this.checkedListBox1.Font = new System.Drawing.Font("굴림", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(12, 63);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(282, 293);
-            this.checkedListBox1.TabIndex = 1;
+            checkedListBox1.Font = new Font("굴림", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            checkedListBox1.FormattingEnabled = true;
+            checkedListBox1.Location = new Point(12, 79);
+            checkedListBox1.Margin = new Padding(3, 4, 3, 4);
+            checkedListBox1.Name = "checkedListBox1";
+            checkedListBox1.Size = new Size(282, 361);
+            checkedListBox1.TabIndex = 1;
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(12, 387);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(104, 31);
-            this.CancelButton.TabIndex = 4;
-            this.CancelButton.Text = "취소";
-            this.CancelButton.UseVisualStyleBackColor = true;
+            CancelButton.Location = new Point(12, 484);
+            CancelButton.Margin = new Padding(3, 4, 3, 4);
+            CancelButton.Name = "CancelButton";
+            CancelButton.Size = new Size(104, 39);
+            CancelButton.TabIndex = 4;
+            CancelButton.Text = "취소";
+            CancelButton.UseVisualStyleBackColor = true;
             // 
             // CompleteButton
             // 
-            this.CompleteButton.Location = new System.Drawing.Point(190, 387);
-            this.CompleteButton.Name = "CompleteButton";
-            this.CompleteButton.Size = new System.Drawing.Size(104, 31);
-            this.CompleteButton.TabIndex = 3;
-            this.CompleteButton.Text = "완료";
-            this.CompleteButton.UseVisualStyleBackColor = true;
+            CompleteButton.Location = new Point(190, 484);
+            CompleteButton.Margin = new Padding(3, 4, 3, 4);
+            CompleteButton.Name = "CompleteButton";
+            CompleteButton.Size = new Size(104, 39);
+            CompleteButton.TabIndex = 3;
+            CompleteButton.Text = "완료";
+            CompleteButton.UseVisualStyleBackColor = true;
+            CompleteButton.Click += CompleteButton_Click_1;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("굴림", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(55, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(192, 19);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "최근 실행된 프로그램";
+            label1.AutoSize = true;
+            label1.Font = new Font("굴림", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label1.Location = new Point(55, 31);
+            label1.Name = "label1";
+            label1.Size = new Size(192, 19);
+            label1.TabIndex = 5;
+            label1.Text = "최근 실행된 프로그램";
             // 
             // ProgramPopUp
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 450);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.CancelButton);
-            this.Controls.Add(this.CompleteButton);
-            this.Controls.Add(this.checkedListBox1);
-            this.Name = "ProgramPopUp";
-            this.Text = "ProgramPopUp";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(313, 562);
+            Controls.Add(label1);
+            Controls.Add(CancelButton);
+            Controls.Add(CompleteButton);
+            Controls.Add(checkedListBox1);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "ProgramPopUp";
+            Text = "ProgramPopUp";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

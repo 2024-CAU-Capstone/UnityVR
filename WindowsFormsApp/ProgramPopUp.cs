@@ -13,38 +13,53 @@ namespace WindowsFormsApp
     public partial class ProgramPopUp : Form
     {
         private Schedule schedule;
+        private Memo memo;
+        private bool IsSchedule;
+        private List<string> ProgramList;
 
         public ProgramPopUp(Schedule schedule)
         {
             InitializeComponent();
             this.schedule = schedule;
-            InitPopUp();           
+            IsSchedule = true;
+            InitPopUp();
+        }
+        public ProgramPopUp(Memo memo)
+        {
+            InitializeComponent();
+            this.memo = memo;
+            IsSchedule = false;
+            InitPopUp();
         }
         private void InitPopUp()
         {           
             GetProgramList();
-            checkedListBox1.Items.Add("Link example A");
-            checkedListBox1.Items.Add("Link example B");
         }
         private void GetProgramList()
         {
-            //프로그램 목록을 받아오는 코드 추가 필요
+            ProgramList = PreserveProcess.RetrieveProcessNames();
+            foreach (string program in ProgramList)
+            {
+                checkedListBox1.Items.Add(program);
+            }
         }
 
-        private void CompleteButton_Click(object sender, EventArgs e)
+        private void CompleteButton_Click_1(object sender, EventArgs e)
         {
             for (int i = 0; i < checkedListBox1.CheckedItems.Count; i++)
             {
                 if (checkedListBox1.GetItemChecked(i))
                 {
-                    //schedule.AddLink(checkedListBox1.CheckedItems[i].ToString());
+                    if (IsSchedule)
+                    {
+                        schedule.AddProgram(checkedListBox1.CheckedItems[i].ToString());
+                    }
+                    else
+                    {
+                        memo.AddProgram(checkedListBox1.CheckedItems[i].ToString());
+                    }                
                 }
             }
-            Close();
-        }
-
-        private void CancelButton_Click(object sender, EventArgs e)
-        {
             Close();
         }
     }
