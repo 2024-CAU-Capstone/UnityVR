@@ -93,7 +93,7 @@ namespace WindowsFormsApp
                 Schedule schedule = ScheduleList[i];
                 memoLabel.Text = ScheduleList[i].time;
                 memoLabel.Location = new Point(10, 120 + count * 50);
-                memoLabel.Size = new Size(50, 15);
+                memoLabel.Size = new Size(70, 15);
                 memoButton.Text = ScheduleList[i].detail;
                 memoButton.Location = new Point(10, 135 + count * 50);
                 memoButton.Size = new Size(150, 30);
