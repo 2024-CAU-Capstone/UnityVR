@@ -26,3 +26,4 @@ C:\Users\user\Documents\scheduler\WindowsFormsApp\obj\Debug\net8.0-windows10.0.1
 C:\Users\user\Documents\scheduler\WindowsFormsApp\obj\Debug\net8.0-windows10.0.17763.0\WindowsFormsApp.pdb
 C:\Users\user\Documents\scheduler\WindowsFormsApp\obj\Debug\net8.0-windows10.0.17763.0\WindowsFormsApp.genruntimeconfig.cache
 C:\Users\user\Documents\scheduler\WindowsFormsApp\obj\Debug\net8.0-windows10.0.17763.0\ref\WindowsFormsApp.dll
+C:\Users\user\Documents\scheduler\WindowsFormsApp\obj\Debug\net8.0-windows10.0.17763.0\WindowsFormsApp.ObjectSerialization.resources

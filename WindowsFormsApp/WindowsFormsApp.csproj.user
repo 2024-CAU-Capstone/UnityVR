@@ -4,6 +4,9 @@
     <Compile Update="Memo.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="ObjectSerialization.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="PopUp.cs">
       <SubType>Form</SubType>
     </Compile>

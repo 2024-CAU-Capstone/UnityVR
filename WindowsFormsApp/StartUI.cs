@@ -30,7 +30,6 @@ namespace WindowsFormsApp
         }
         #region public method
         public void AddMemo(Memo memo) => MemoList.Add(memo);
-
         public void AddSchedule(Schedule schedule) => ScheduleList.Add(schedule);
         public DateTime GetDate() => date;
         public void LoadMemoAndSchedule(DateTime date)

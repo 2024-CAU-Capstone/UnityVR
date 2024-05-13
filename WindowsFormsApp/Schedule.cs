@@ -69,6 +69,15 @@ namespace WindowsFormsApp
         }
         public void AddLink(string link) => LinkList.Add(link);
         public void AddProgram(string program) => ProgramList.Add(program);
+        public List<string> GetLinkList() => LinkList;
+        public List<string> GetProgramList() => ProgramList;
+        public List<Image> GetScreenShotList() => ScreenShotList;
+        public void SetLinkList(List<string> linkList) => LinkList = linkList;
+        public void SetProgramList(List<string> programList) => ProgramList = programList;
+        public void SetScreenShotList(List<Image> screenShotList) => ScreenShotList = screenShotList;
+        public void SetScheduleTime(DateTime scheduleTime) => ScheduleTime = scheduleTime;
+        public void SetIsMake(bool isMake) => IsMake = isMake;
+
 
         public void ShowLink()
         {
