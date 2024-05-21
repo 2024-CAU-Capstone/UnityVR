@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,8 +22,8 @@ namespace WindowsFormsApp
         public string file;
         public string fileFullPath;
         public string time;
-        public string alarmTime;
-        
+        public int alarmTime;
+
         private List<string> LinkList;
         private List<string> ProgramList;
         private List<Image> ScreenShotList;
@@ -62,13 +63,21 @@ namespace WindowsFormsApp
             /////////////////////////////
             ShowLink();
             ContentText.Text = detail;
-            comboBox.Text = alarmTime;
-            textBox1.Text = time;
+            maskedTextBox1.Text = time;
             fileName.Text = file;
             ScheduleTime = saveSchedule.ScheduleTime;
         }
         public void AddLink(string link) => LinkList.Add(link);
         public void AddProgram(string program) => ProgramList.Add(program);
+        public List<string> GetLinkList() => LinkList;
+        public List<string> GetProgramList() => ProgramList;
+        public List<Image> GetScreenShotList() => ScreenShotList;
+        public void SetLinkList(List<string> linkList) => LinkList = linkList;
+        public void SetProgramList(List<string> programList) => ProgramList = programList;
+        public void SetScreenShotList(List<Image> screenShotList) => ScreenShotList = screenShotList;
+        public void SetScheduleTime(DateTime scheduleTime) => ScheduleTime = scheduleTime;
+        public void SetIsMake(bool isMake) => IsMake = isMake;
+
 
         public void ShowLink()
         {
@@ -120,14 +129,22 @@ namespace WindowsFormsApp
 
         private void CompletedButton_Click(object sender, EventArgs e)
         {
-            //작성 완료 버튼 - test ver
-            Debug.WriteLine(IsMake);
+            //작성 완료 버튼 - test ver           
             if (IsMake)
             {
+                DateTime date = Convert.ToDateTime(time);
+                date = date.AddMinutes(-alarmTime);
                 detail = ContentText.Text;
                 startUI.AddSchedule(this);
                 startUI.LoadMemoAndSchedule(startUI.GetDate());
-            }         
+                new ToastContentBuilder()
+                    .AddText("일정 알림")
+                    .AddText("일정 : " + detail)
+                    .AddText("시간 : " + time)
+                    .SetToastScenario(ToastScenario.Alarm)
+                    .Schedule(date);
+
+            }
             Close();
         }
 
@@ -162,12 +179,23 @@ namespace WindowsFormsApp
 
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            alarmTime = comboBox.SelectedItem.ToString();
+            switch (comboBox.SelectedItem.ToString())
+            {
+                case "5분 전":
+                    alarmTime = 5;
+                    break;
+                case "10분 전":
+                    alarmTime = 10;
+                    break;
+                case "30분 전":
+                    alarmTime = 30;
+                    break;
+            }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void maskedTextBox1TextChanged(object sender, EventArgs e)
         {
-            time = textBox1.Text;
+            time = maskedTextBox1.Text;
         }
     }
 }

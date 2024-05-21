@@ -17,16 +17,14 @@ namespace WindowsFormsApp
     {
         private StartUI startUI;
         private bool IsMake;
-
         public string detail;
         public string file;
         public string fileFullPath;
-
         private List<string> LinkList;
         private List<string> ProgramList;
         private List<Image> ScreenShotList;
-
         private DateTime MemoTime;
+
         public Memo(StartUI startUI)
         {
             InitializeComponent();
@@ -64,6 +62,15 @@ namespace WindowsFormsApp
         public void AddLink(string link) => LinkList.Add(link);
         public void AddProgram(string program) => ProgramList.Add(program);
         public DateTime GetMemoTime() => MemoTime;
+
+        public List<string> GetLinkList() => LinkList;
+        public List<string> GetProgramList() => ProgramList;
+        public List<Image> GetScreenShotList() => ScreenShotList;
+        public void SetLinkList(List<string> linkList) => LinkList = linkList;
+        public void SetProgramList(List<string> programList) => ProgramList = programList;
+        public void SetScreenShotList(List<Image> screenShotList) => ScreenShotList = screenShotList;
+        public void SetMemoTime(DateTime memoTime) => MemoTime = memoTime;
+        public void SetIsMake(bool isMake) => IsMake = isMake;
         public void ShowLink()
         {
             for (int i = 0; i < LinkList.Count; i++)

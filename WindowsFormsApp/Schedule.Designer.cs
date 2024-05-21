@@ -30,200 +30,204 @@ namespace WindowsFormsApp
         /// </summary>
         private void InitializeComponent()
         {
-            this.fileName = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.CompletedButton = new System.Windows.Forms.Button();
-            this.FilePopUPButton = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ContentText = new System.Windows.Forms.TextBox();
-            this.LinkPopUpButton = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.ApplicationButton = new System.Windows.Forms.Button();
-            this.comboBox = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.SuspendLayout();
+            fileName = new Label();
+            label5 = new Label();
+            CompletedButton = new Button();
+            FilePopUPButton = new Button();
+            label4 = new Label();
+            label3 = new Label();
+            ContentText = new TextBox();
+            LinkPopUpButton = new Button();
+            label2 = new Label();
+            label1 = new Label();
+            label6 = new Label();
+            ApplicationButton = new Button();
+            comboBox = new ComboBox();
+            label8 = new Label();
+            label9 = new Label();
+            maskedTextBox1 = new MaskedTextBox();
+            SuspendLayout();
             // 
             // fileName
             // 
-            this.fileName.AutoSize = true;
-            this.fileName.Location = new System.Drawing.Point(285, 211);
-            this.fileName.Name = "fileName";
-            this.fileName.Size = new System.Drawing.Size(0, 12);
-            this.fileName.TabIndex = 19;
+            fileName.AutoSize = true;
+            fileName.Location = new Point(285, 211);
+            fileName.Name = "fileName";
+            fileName.Size = new Size(0, 15);
+            fileName.TabIndex = 19;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("굴림", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label5.Location = new System.Drawing.Point(624, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 21);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "일정 추가";
+            label5.AutoSize = true;
+            label5.Font = new Font("굴림", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            label5.Location = new Point(624, 9);
+            label5.Name = "label5";
+            label5.Size = new Size(106, 21);
+            label5.TabIndex = 18;
+            label5.Text = "일정 추가";
             // 
             // CompletedButton
             // 
-            this.CompletedButton.Location = new System.Drawing.Point(635, 286);
-            this.CompletedButton.Name = "CompletedButton";
-            this.CompletedButton.Size = new System.Drawing.Size(95, 34);
-            this.CompletedButton.TabIndex = 17;
-            this.CompletedButton.Text = "작성 완료";
-            this.CompletedButton.UseVisualStyleBackColor = true;
-            this.CompletedButton.Click += new System.EventHandler(this.CompletedButton_Click);
+            CompletedButton.Location = new Point(635, 286);
+            CompletedButton.Name = "CompletedButton";
+            CompletedButton.Size = new Size(95, 34);
+            CompletedButton.TabIndex = 17;
+            CompletedButton.Text = "작성 완료";
+            CompletedButton.UseVisualStyleBackColor = true;
+            CompletedButton.Click += CompletedButton_Click;
             // 
             // FilePopUPButton
             // 
-            this.FilePopUPButton.Location = new System.Drawing.Point(152, 200);
-            this.FilePopUPButton.Name = "FilePopUPButton";
-            this.FilePopUPButton.Size = new System.Drawing.Size(127, 35);
-            this.FilePopUPButton.TabIndex = 16;
-            this.FilePopUPButton.Text = "파일 선택";
-            this.FilePopUPButton.UseVisualStyleBackColor = true;
-            this.FilePopUPButton.Click += new System.EventHandler(this.FilePopUPButton_Click);
+            FilePopUPButton.Location = new Point(152, 200);
+            FilePopUPButton.Name = "FilePopUPButton";
+            FilePopUPButton.Size = new Size(127, 35);
+            FilePopUPButton.TabIndex = 16;
+            FilePopUPButton.Text = "파일 선택";
+            FilePopUPButton.UseVisualStyleBackColor = true;
+            FilePopUPButton.Click += FilePopUPButton_Click;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("굴림", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label4.Location = new System.Drawing.Point(23, 199);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(122, 21);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "파일 추가 : ";
+            label4.AutoSize = true;
+            label4.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label4.Location = new Point(23, 199);
+            label4.Name = "label4";
+            label4.Size = new Size(122, 21);
+            label4.TabIndex = 15;
+            label4.Text = "파일 추가 : ";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("굴림", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.Location = new System.Drawing.Point(23, 123);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(115, 21);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "스크린샷 : ";
+            label3.AutoSize = true;
+            label3.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label3.Location = new Point(23, 123);
+            label3.Name = "label3";
+            label3.Size = new Size(115, 21);
+            label3.TabIndex = 14;
+            label3.Text = "스크린샷 : ";
             // 
             // ContentText
             // 
-            this.ContentText.Location = new System.Drawing.Point(91, 14);
-            this.ContentText.Name = "ContentText";
-            this.ContentText.Size = new System.Drawing.Size(382, 21);
-            this.ContentText.TabIndex = 13;
+            ContentText.Location = new Point(91, 14);
+            ContentText.Name = "ContentText";
+            ContentText.Size = new Size(382, 23);
+            ContentText.TabIndex = 13;
             // 
             // LinkPopUpButton
             // 
-            this.LinkPopUpButton.Location = new System.Drawing.Point(90, 55);
-            this.LinkPopUpButton.Name = "LinkPopUpButton";
-            this.LinkPopUpButton.Size = new System.Drawing.Size(383, 28);
-            this.LinkPopUpButton.TabIndex = 12;
-            this.LinkPopUpButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.LinkPopUpButton.UseVisualStyleBackColor = true;
-            this.LinkPopUpButton.Click += new System.EventHandler(this.LinkPopUpButton_Click);
+            LinkPopUpButton.Location = new Point(90, 55);
+            LinkPopUpButton.Name = "LinkPopUpButton";
+            LinkPopUpButton.Size = new Size(383, 28);
+            LinkPopUpButton.TabIndex = 12;
+            LinkPopUpButton.TextImageRelation = TextImageRelation.ImageAboveText;
+            LinkPopUpButton.UseVisualStyleBackColor = true;
+            LinkPopUpButton.Click += LinkPopUpButton_Click;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("굴림", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(-249, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 21);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "링크 : ";
+            label2.AutoSize = true;
+            label2.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label2.Location = new Point(-249, 63);
+            label2.Name = "label2";
+            label2.Size = new Size(73, 21);
+            label2.TabIndex = 11;
+            label2.Text = "링크 : ";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("굴림", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(-249, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 21);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "내용 : ";
+            label1.AutoSize = true;
+            label1.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label1.Location = new Point(-249, 22);
+            label1.Name = "label1";
+            label1.Size = new Size(73, 21);
+            label1.TabIndex = 10;
+            label1.Text = "내용 : ";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("굴림", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label6.Location = new System.Drawing.Point(23, 286);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(206, 21);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "어플리케이션 지정 : ";
+            label6.AutoSize = true;
+            label6.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label6.Location = new Point(23, 286);
+            label6.Name = "label6";
+            label6.Size = new Size(206, 21);
+            label6.TabIndex = 20;
+            label6.Text = "어플리케이션 지정 : ";
             // 
             // ApplicationButton
             // 
-            this.ApplicationButton.Location = new System.Drawing.Point(235, 283);
-            this.ApplicationButton.Name = "ApplicationButton";
-            this.ApplicationButton.Size = new System.Drawing.Size(127, 35);
-            this.ApplicationButton.TabIndex = 21;
-            this.ApplicationButton.Text = "앱 선택";
-            this.ApplicationButton.UseVisualStyleBackColor = true;
-            this.ApplicationButton.Click += new System.EventHandler(this.ApplicationButton_Click);
+            ApplicationButton.Location = new Point(235, 283);
+            ApplicationButton.Name = "ApplicationButton";
+            ApplicationButton.Size = new Size(127, 35);
+            ApplicationButton.TabIndex = 21;
+            ApplicationButton.Text = "앱 선택";
+            ApplicationButton.UseVisualStyleBackColor = true;
+            ApplicationButton.Click += ApplicationButton_Click;
             // 
             // comboBox
             // 
-            this.comboBox.FormattingEnabled = true;
-            this.comboBox.Location = new System.Drawing.Point(628, 86);
-            this.comboBox.Name = "comboBox";
-            this.comboBox.Size = new System.Drawing.Size(102, 20);
-            this.comboBox.TabIndex = 23;
-            this.comboBox.SelectedIndexChanged += new System.EventHandler(this.comboBox_SelectedIndexChanged);
+            comboBox.FormattingEnabled = true;
+            comboBox.Location = new Point(628, 86);
+            comboBox.Name = "comboBox";
+            comboBox.Size = new Size(102, 23);
+            comboBox.TabIndex = 23;
+            comboBox.SelectedIndexChanged += comboBox_SelectedIndexChanged;
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("굴림", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label8.Location = new System.Drawing.Point(12, 55);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(73, 21);
-            this.label8.TabIndex = 25;
-            this.label8.Text = "링크 : ";
+            label8.AutoSize = true;
+            label8.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label8.Location = new Point(12, 55);
+            label8.Name = "label8";
+            label8.Size = new Size(73, 21);
+            label8.TabIndex = 25;
+            label8.Text = "링크 : ";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("굴림", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label9.Location = new System.Drawing.Point(12, 14);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(73, 21);
-            this.label9.TabIndex = 24;
-            this.label9.Text = "내용 : ";
+            label9.AutoSize = true;
+            label9.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label9.Location = new Point(12, 14);
+            label9.Name = "label9";
+            label9.Size = new Size(73, 21);
+            label9.TabIndex = 24;
+            label9.Text = "내용 : ";
             // 
-            // textBox1
+            // maskedTextBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(628, 55);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 26;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            maskedTextBox1.Location = new Point(630, 53);
+            maskedTextBox1.Mask = "90시90분";
+            maskedTextBox1.Name = "maskedTextBox1";
+            maskedTextBox1.Size = new Size(100, 23);
+            maskedTextBox1.TabIndex = 27;
+            maskedTextBox1.TextAlign = HorizontalAlignment.Center;
+            maskedTextBox1.ValidatingType = typeof(DateTime);
+            maskedTextBox1.TextChanged += maskedTextBox1TextChanged;
             // 
             // Schedule
             // 
-            this.ClientSize = new System.Drawing.Size(742, 332);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.comboBox);
-            this.Controls.Add(this.ApplicationButton);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.fileName);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.CompletedButton);
-            this.Controls.Add(this.FilePopUPButton);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.ContentText);
-            this.Controls.Add(this.LinkPopUpButton);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Name = "Schedule";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            ClientSize = new Size(742, 332);
+            Controls.Add(maskedTextBox1);
+            Controls.Add(label8);
+            Controls.Add(label9);
+            Controls.Add(comboBox);
+            Controls.Add(ApplicationButton);
+            Controls.Add(label6);
+            Controls.Add(fileName);
+            Controls.Add(label5);
+            Controls.Add(CompletedButton);
+            Controls.Add(FilePopUPButton);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(ContentText);
+            Controls.Add(LinkPopUpButton);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Name = "Schedule";
+            ResumeLayout(false);
+            PerformLayout();
         }
+
+
 
         #endregion
 
@@ -242,6 +246,6 @@ namespace WindowsFormsApp
         private ComboBox comboBox;
         private Label label8;
         private Label label9;
-        private TextBox textBox1;
+        private MaskedTextBox maskedTextBox1;
     }
 }
