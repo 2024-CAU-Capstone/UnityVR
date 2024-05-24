@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace WindowsFormsApp
 {
-    public partial class Memo : Form
+    public partial class Memo : Form, FilePathTracker
     {
         private StartUI startUI;
         private bool IsMake;
@@ -149,6 +149,11 @@ namespace WindowsFormsApp
         {
             ProgramPopUp programPopUp = new ProgramPopUp(this);
             programPopUp.Show();
+        }
+
+        public string BuildPath()
+        {
+            return @".\" + detail;
         }
     }
 }

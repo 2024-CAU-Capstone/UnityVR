@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace WindowsFormsApp
 {
-    public partial class Schedule : Form
+    public partial class Schedule : Form, FilePathTracker
     {
         private StartUI startUI;
         private bool IsMake;
@@ -196,6 +196,11 @@ namespace WindowsFormsApp
         private void maskedTextBox1TextChanged(object sender, EventArgs e)
         {
             time = maskedTextBox1.Text;
+        }
+
+        public string BuildPath()
+        {
+            return @".\" + detail;
         }
     }
 }
