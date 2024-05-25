@@ -16,6 +16,7 @@ namespace WindowsFormsApp
         private Memo memo;
         private bool IsSchedule;
         private List<string> ProgramList;
+        private List<ProcessInfo> ProcessList;
 
         public ProgramPopUp(Schedule schedule)
         {
@@ -38,6 +39,7 @@ namespace WindowsFormsApp
         private void GetProgramList()
         {
             ProgramList = PreserveProcess.RetrieveProcessNames();
+            ProcessList = PreserveProcess.GetWindowedProcesses();
             foreach (string program in ProgramList)
             {
                 checkedListBox1.Items.Add(program);
@@ -46,17 +48,18 @@ namespace WindowsFormsApp
 
         private void CompleteButton_Click_1(object sender, EventArgs e)
         {
-            for (int i = 0; i < checkedListBox1.CheckedItems.Count; i++)
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
             {
                 if (checkedListBox1.GetItemChecked(i))
                 {
                     if (IsSchedule)
                     {
-                        schedule.AddProgram(checkedListBox1.CheckedItems[i].ToString());
+                        schedule.AddProgram(checkedListBox1.Items[i].ToString());
                     }
                     else
                     {
-                        memo.AddProgram(checkedListBox1.CheckedItems[i].ToString());
+                        memo.AddProgram(checkedListBox1.Items[i].ToString());
+                        memo.AddProcess(ProcessList[i]);
                     }                
                 }
             }
