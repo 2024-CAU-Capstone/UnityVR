@@ -15,12 +15,13 @@ namespace WindowsFormsApp
         {
             "TextInputHost",
             "SystemSettings",
-            "ApplicationFrameHost"
+            "ApplicationFrameHost",
+            "Explorer"
         };
         //호출 순간의 윈도우를 가진 프로세스를 반환, 원리는 MainWindowsHandle이 존재한다면 윈도우가 존재한다고 판단.
-        private static List<Process> GetWindowedProcesses()
+        public static List<ProcessInfo> GetWindowedProcesses()
         {
-            List<Process> processes = new List<Process>();
+            List<ProcessInfo> processes = new List<ProcessInfo>();
             Process[] openProcesses = Process.GetProcesses();
             bool isExclude = false;
             foreach (Process process in openProcesses)
@@ -40,8 +41,13 @@ namespace WindowsFormsApp
                         isExclude = false;
                         continue;
                     }
-                    processes.Add(process);
+                    processes.Add(new ProcessInfo(process));
                 }
+            }
+            List<string> explorerPaths = ExplorerPahtExtract.OpenPaths();
+            foreach (string path in explorerPaths)
+            {
+                processes.Add(new ProcessInfo(path));
             }
             return processes;
         }
@@ -49,15 +55,21 @@ namespace WindowsFormsApp
         public static List<String> RetrieveProcessNames()
         {
             List<String> processNames = new List<String>();
-            Process[] processes = Process.GetProcesses();
-            foreach (Process process in GetWindowedProcesses())
+            foreach (ProcessInfo process in GetWindowedProcesses())
             {
-                processNames.Add(process.ProcessName);
+                if (process.Name.ToLower().Equals("explorer"))
+                {
+                    processNames.Add(process.ExplorerPath);
+                }
+                else
+                {
+                    processNames.Add(process.Name);
+                }
             }
-
             return processNames;
         }
         //현 순간의 프로세스들을 호출한 파일명들을 저장 RetrieveProcessNames과 함께 쓸것을 추천하며, 항상 RecallProcesses 이전에 호출한다. (null 에러 발생)
+        /*
         public static void FreezeProcesses()
         {
             fileNames = new List<String>();
@@ -75,5 +87,6 @@ namespace WindowsFormsApp
             }
         }
         //TODO: Serialize를 이용하여 어플리케이션의 종료 후에도 불러오기가 가능하도록 하기.
+        */
     }
 }

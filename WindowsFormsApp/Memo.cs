@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace WindowsFormsApp
 {
-    public partial class Memo : Form
+    public partial class Memo : Form, FilePathTracker
     {
         private StartUI startUI;
         private bool IsMake;
@@ -22,6 +22,7 @@ namespace WindowsFormsApp
         public string fileFullPath;
         private List<string> LinkList;
         private List<string> ProgramList;
+        private List<ProcessInfo> ProcessList;
         private List<Image> ScreenShotList;
         private DateTime MemoTime;
 
@@ -37,6 +38,7 @@ namespace WindowsFormsApp
             ScreenShotList = new List<Image>();
             LinkList = new List<string>();
             ProgramList = new List<string>();
+            ProcessList = new List<ProcessInfo>();
             detail = "no detail";
             file = "no file";
             fileFullPath = "no file";
@@ -61,11 +63,13 @@ namespace WindowsFormsApp
         }
         public void AddLink(string link) => LinkList.Add(link);
         public void AddProgram(string program) => ProgramList.Add(program);
+        public void AddProcess(ProcessInfo process) => ProcessList.Add(process);
         public DateTime GetMemoTime() => MemoTime;
 
         public List<string> GetLinkList() => LinkList;
         public List<string> GetProgramList() => ProgramList;
         public List<Image> GetScreenShotList() => ScreenShotList;
+        public List<ProcessInfo> GetProcessList() => ProcessList;
         public void SetLinkList(List<string> linkList) => LinkList = linkList;
         public void SetProgramList(List<string> programList) => ProgramList = programList;
         public void SetScreenShotList(List<Image> screenShotList) => ScreenShotList = screenShotList;
@@ -149,6 +153,11 @@ namespace WindowsFormsApp
         {
             ProgramPopUp programPopUp = new ProgramPopUp(this);
             programPopUp.Show();
+        }
+
+        public string BuildPath()
+        {
+            return @".\" + detail;
         }
     }
 }

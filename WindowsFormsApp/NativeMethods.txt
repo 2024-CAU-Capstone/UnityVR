@@ -4,3 +4,4 @@ ShowWindow
 WM_HOTKEY
 SetWindowDisplayAffinity
 EnumDisplayMonitors
+IShellFolderViewDual2
