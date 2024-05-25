@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Schema;
 
 namespace WindowsFormsApp
 {
@@ -37,6 +38,7 @@ namespace WindowsFormsApp
                     fileFullPath = memo.fileFullPath,
                     LinkList = memo.GetLinkList(),
                     ProgramList = memo.GetProgramList(),
+                    ProcessList = memo.GetProcessList(),
                     ScreenShotList = memo.GetScreenShotList(),
                     MemoTime = memo.GetMemoTime()
                 };
@@ -53,6 +55,7 @@ namespace WindowsFormsApp
                     fileFullPath = schedule.fileFullPath,
                     LinkList = schedule.GetLinkList(),
                     ProgramList = schedule.GetProgramList(),
+                    ProcessList = schedule.GetProcessList(),
                     ScreenShotList = schedule.GetScreenShotList(),
                     ScheduleTime = schedule.GetScheduleTime(),
                     time = schedule.time,
@@ -130,6 +133,7 @@ namespace WindowsFormsApp
             public string fileFullPath;
             public List<string> LinkList;
             public List<string> ProgramList;
+            public List<ProcessInfo> ProcessList;
             public List<Image> ScreenShotList;
             public DateTime MemoTime;
         }
@@ -143,6 +147,7 @@ namespace WindowsFormsApp
             public string fileFullPath;
             public List<string> LinkList;
             public List<string> ProgramList;
+            public List<ProcessInfo> ProcessList;
             public List<Image> ScreenShotList;
             public DateTime ScheduleTime;
             public string time;

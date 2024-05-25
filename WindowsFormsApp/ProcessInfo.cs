@@ -7,7 +7,7 @@ using Windows.ApplicationModel.Appointments.DataProvider;
 
 namespace WindowsFormsApp
 {
-    internal class ProcessInfo
+    public class ProcessInfo
     {
         private string _Name;
         private string _Path;
