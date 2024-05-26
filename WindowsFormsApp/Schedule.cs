@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace WindowsFormsApp
 {
-    public partial class Schedule : Form, FilePathTracker
+    public partial class Schedule : Form
     {
         private StartUI startUI;
         private bool IsMake;
@@ -30,6 +31,9 @@ namespace WindowsFormsApp
         private List<Image> ScreenShotList;
 
         private DateTime ScheduleTime;
+        /////////////////////////////
+        //unSaved
+        private CheckBox[] screenCheckBox;
         public Schedule(StartUI startUI)
         {
             InitializeComponent();
@@ -63,6 +67,7 @@ namespace WindowsFormsApp
             time = saveSchedule.time;
             IsMake = false;
             /////////////////////////////
+            MakeCheckBox();
             ShowLink();
             ContentText.Text = detail;
             maskedTextBox1.Text = time;
@@ -102,33 +107,44 @@ namespace WindowsFormsApp
         }
         private void MakeCheckBox()
         {
+            screenCheckBox = new CheckBox[Screen.AllScreens.Length];
             Screen[] screens = Screen.AllScreens;
             for (int i = 0; i < screens.Length; i++)
             {
-                CheckBox screenCheckBox = new CheckBox();
-                screenCheckBox.Text = "Screen " + (i + 1);
-                screenCheckBox.Location = new Point(140 + i * 150, 120);
-                screenCheckBox.Size = new Size(100, 30);
-                this.Controls.Add(screenCheckBox);
+                CheckBox CheckBox = new CheckBox();
+                CheckBox.Text = "Screen " + (i + 1);
+                CheckBox.Location = new Point(140 + i * 150, 120);
+                CheckBox.Size = new Size(100, 30);
+                Controls.Add(CheckBox);
+                screenCheckBox[i] = CheckBox;
             }
         }
 
         private void TakeScreenShot()
         {
-            /*
             Screen[] screens = Screen.AllScreens;
             for (int i = 0; i < screens.Length; i++)
             {
-                Bitmap bitmap = new Bitmap(screens[i].Bounds.Width, screens[i].Bounds.Height);
-                Graphics graphics = Graphics.FromImage(bitmap);
-                Image img = Clipboard.GetImage();
+                if (screenCheckBox[i].Checked) continue;
+                Rectangle rectangle = Screen.PrimaryScreen.Bounds;
 
-                graphics.CopyFromScreen(screens[i].Bounds.X, screens[i].Bounds.Y, 0, 0, screens[i].Bounds.Size);
-                Clipboard.SetImage(bitmap);
-                graphics.Dispose();
-                ScreenShotList.Add(img);
+                int bitsPerPixel = Screen.PrimaryScreen.BitsPerPixel;
+                PixelFormat pixelFormat = PixelFormat.Format32bppArgb;
+                if (bitsPerPixel <= 16)
+                {
+                    pixelFormat = PixelFormat.Format16bppRgb565;
+                }
+                else if (bitsPerPixel <= 24)
+                {
+                    pixelFormat = PixelFormat.Format24bppRgb;
+                }
+
+                Bitmap bitmap = new Bitmap(rectangle.Width, rectangle.Height, pixelFormat);
+                Graphics graphics = Graphics.FromImage(bitmap);
+                graphics.CopyFromScreen(rectangle.Left, rectangle.Top, 0, 0, rectangle.Size);
+                ScreenShotList.Add(bitmap);
+                bitmap.Dispose();
             }
-            */
         }
 
         private void CompletedButton_Click(object sender, EventArgs e)
@@ -136,6 +152,7 @@ namespace WindowsFormsApp
             //작성 완료 버튼 - test ver           
             if (IsMake)
             {
+                TakeScreenShot();
                 DateTime date = Convert.ToDateTime(time);
                 date = date.AddMinutes(-alarmTime);
                 detail = ContentText.Text;
@@ -200,11 +217,6 @@ namespace WindowsFormsApp
         private void maskedTextBox1TextChanged(object sender, EventArgs e)
         {
             time = maskedTextBox1.Text;
-        }
-
-        public string BuildPath()
-        {
-            return @".\" + detail;
         }
     }
 }

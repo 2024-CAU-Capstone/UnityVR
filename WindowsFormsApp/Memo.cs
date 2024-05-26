@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,9 @@ namespace WindowsFormsApp
         private List<ProcessInfo> ProcessList;
         private List<Image> ScreenShotList;
         private DateTime MemoTime;
+        /////////////////////////////
+        //unSaved
+        private CheckBox[] screenCheckBox;
 
         public Memo(StartUI startUI)
         {
@@ -56,10 +60,11 @@ namespace WindowsFormsApp
             MemoTime = savedmemo.MemoTime;
             IsMake = false;
             /////////////////////////////
+            MakeCheckBox();
             ShowLink();
             ContentText.Text = detail;
             fileName.Text = file;
-            
+
         }
         public void AddLink(string link) => LinkList.Add(link);
         public void AddProgram(string program) => ProgramList.Add(program);
@@ -85,33 +90,44 @@ namespace WindowsFormsApp
 
         private void MakeCheckBox()
         {
+            screenCheckBox = new CheckBox[Screen.AllScreens.Length];
             Screen[] screens = Screen.AllScreens;
             for (int i = 0; i < screens.Length; i++)
             {
-                CheckBox screenCheckBox = new CheckBox();
-                screenCheckBox.Text = "Screen " + (i + 1);
-                screenCheckBox.Location = new Point(130 + i * 150, 135);
-                screenCheckBox.Size = new Size(100, 30);
-                this.Controls.Add(screenCheckBox);
+                CheckBox CheckBox = new CheckBox();
+                CheckBox.Text = "Screen " + (i + 1);
+                CheckBox.Location = new Point(130 + i * 150, 135);
+                CheckBox.Size = new Size(100, 30);
+                this.Controls.Add(CheckBox);
+                screenCheckBox[i] = CheckBox;
             }
         }
 
         private void TakeScreenShot()
         {
-            /*
             Screen[] screens = Screen.AllScreens;
             for (int i = 0; i < screens.Length; i++)
             {
-                Bitmap bitmap = new Bitmap(screens[i].Bounds.Width, screens[i].Bounds.Height);
-                Graphics graphics = Graphics.FromImage(bitmap);
-                Image img = Clipboard.GetImage();
+                if (screenCheckBox[i].Checked) continue;
+                Rectangle rectangle = Screen.PrimaryScreen.Bounds;
 
-                graphics.CopyFromScreen(screens[i].Bounds.X, screens[i].Bounds.Y, 0, 0, screens[i].Bounds.Size);
-                Clipboard.SetImage(bitmap);
-                graphics.Dispose();
-                ScreenShotList.Add(img);
+                int bitsPerPixel = Screen.PrimaryScreen.BitsPerPixel;
+                PixelFormat pixelFormat = PixelFormat.Format32bppArgb;
+                if (bitsPerPixel <= 16)
+                {
+                    pixelFormat = PixelFormat.Format16bppRgb565;
+                }
+                else if (bitsPerPixel <= 24)
+                {
+                    pixelFormat = PixelFormat.Format24bppRgb;
+                }
+
+                Bitmap bitmap = new Bitmap(rectangle.Width, rectangle.Height, pixelFormat);
+                Graphics graphics = Graphics.FromImage(bitmap);
+                graphics.CopyFromScreen(rectangle.Left, rectangle.Top, 0, 0, rectangle.Size);
+                ScreenShotList.Add(bitmap);
+                bitmap.Dispose();
             }
-            */
         }
 
         private void CompletedButton_Click(object sender, EventArgs e)
@@ -119,10 +135,11 @@ namespace WindowsFormsApp
             //작성 완료 버튼 - test ver
             if (IsMake)
             {
+                TakeScreenShot();
                 detail = ContentText.Text;
                 startUI.AddMemo(this);
                 startUI.LoadMemoAndSchedule(startUI.GetDate());
-            }         
+            }
             Close();
         }
 

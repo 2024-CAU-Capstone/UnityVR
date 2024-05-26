@@ -1,0 +1,170 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|c:\\users\\user\\documents\\scheduler\\windowsformsapp\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|solutionrelative:schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|c:\\users\\user\\documents\\scheduler\\windowsformsapp\\memo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|solutionrelative:memo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|c:\\users\\user\\documents\\scheduler\\windowsformsapp\\memo.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|solutionrelative:memo.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|c:\\users\\user\\documents\\scheduler\\windowsformsapp\\memo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|solutionrelative:memo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|c:\\users\\user\\documents\\scheduler\\windowsformsapp\\objectserialization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|solutionrelative:objectserialization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|c:\\users\\user\\documents\\scheduler\\windowsformsapp\\schedule.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|solutionrelative:schedule.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|c:\\users\\user\\documents\\scheduler\\windowsformsapp\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|solutionrelative:schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|c:\\users\\user\\documents\\scheduler\\windowsformsapp\\popup.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|solutionrelative:popup.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|c:\\users\\user\\documents\\scheduler\\windowsformsapp\\startui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{050E845B-116D-442F-B863-F60411D780E9}|WindowsFormsApp.csproj|solutionrelative:startui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Memo.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\Memo.Designer.cs",
+              "RelativeDocumentMoniker": "Memo.Designer.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\Memo.Designer.cs",
+              "RelativeToolTip": "Memo.Designer.cs",
+              "ViewState": "AQIAAHMAAAAAAAAAAAAkwIUAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T06:08:18.552Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Memo.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\Memo.cs",
+              "RelativeDocumentMoniker": "Memo.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\Memo.cs",
+              "RelativeToolTip": "Memo.cs",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAcwEwAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T06:08:11.328Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Schedule.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\Schedule.cs",
+              "RelativeDocumentMoniker": "Schedule.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\Schedule.cs",
+              "RelativeToolTip": "Schedule.cs",
+              "ViewState": "AQIAACAAAAAAAAAAAAAgwDEAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T06:04:52.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Schedule.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\Schedule.Designer.cs",
+              "RelativeDocumentMoniker": "Schedule.Designer.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\Schedule.Designer.cs",
+              "RelativeToolTip": "Schedule.Designer.cs",
+              "ViewState": "AQIAADAAAAAAAAAAAAAkwEIAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T06:04:30.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Schedule.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\Schedule.cs",
+              "RelativeDocumentMoniker": "Schedule.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\Schedule.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "Schedule.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T06:04:25.154Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ObjectSerialization.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\ObjectSerialization.cs",
+              "RelativeDocumentMoniker": "ObjectSerialization.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\ObjectSerialization.cs",
+              "RelativeToolTip": "ObjectSerialization.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T06:03:57.742Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PopUp.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\PopUp.Designer.cs",
+              "RelativeDocumentMoniker": "PopUp.Designer.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\PopUp.Designer.cs",
+              "RelativeToolTip": "PopUp.Designer.cs",
+              "ViewState": "AQIAAAcAAAAAAAAAAAAmwF8AAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T06:03:52.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "StartUI.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\StartUI.cs",
+              "RelativeDocumentMoniker": "StartUI.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\StartUI.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "StartUI.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T06:02:44.795Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Memo.cs [\uB514\uC790\uC778]",
+              "DocumentMoniker": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\Memo.cs",
+              "RelativeDocumentMoniker": "Memo.cs",
+              "ToolTip": "C:\\Users\\user\\Documents\\scheduler\\WindowsFormsApp\\Memo.cs [\uB514\uC790\uC778]",
+              "RelativeToolTip": "Memo.cs [\uB514\uC790\uC778]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-26T06:02:21.125Z",
+              "EditorCaption": " [\uB514\uC790\uC778]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
