@@ -64,7 +64,7 @@ namespace WindowsFormsApp
             ShowLink();
             ContentText.Text = detail;
             fileName.Text = file;
-            
+
         }
         public void AddLink(string link) => LinkList.Add(link);
         public void AddProgram(string program) => ProgramList.Add(program);
@@ -139,7 +139,7 @@ namespace WindowsFormsApp
                 detail = ContentText.Text;
                 startUI.AddMemo(this);
                 startUI.LoadMemoAndSchedule(startUI.GetDate());
-            }         
+            }
             Close();
         }
 
