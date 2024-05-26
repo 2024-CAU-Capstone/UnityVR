@@ -18,6 +18,7 @@ namespace WindowsFormsApp
         private List<Schedule> ScheduleList;
         private DateTime date;
         KeyboardHook hook;
+        MailHandler mailHandler;
 
         public StartUI()
         {
@@ -27,6 +28,7 @@ namespace WindowsFormsApp
             hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F12);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F11);
+            mailHandler = new MailHandler();
         }
         #region public method
         public void AddMemo(Memo memo) => MemoList.Add(memo);
