@@ -56,6 +56,13 @@ namespace WindowsFormsApp
 
             foreach (var schedule in ScheduleList)
             {
+                List<string> ScreenShots = new List<string>();
+                foreach (Image screenshot in schedule.GetScreenShotList())
+                {
+                    MemoryStream ms = new MemoryStream();
+                    screenshot.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                    ScreenShots.Add(Convert.ToBase64String(ms.GetBuffer()));
+                }
                 ScheduleObject scheduleObject = new ScheduleObject
                 {
                     IsMake = false,
@@ -65,7 +72,7 @@ namespace WindowsFormsApp
                     LinkList = schedule.GetLinkList(),
                     ProgramList = schedule.GetProgramList(),
                     ProcessList = schedule.GetProcessList(),
-                    ScreenShotList = schedule.GetScreenShotList(),
+                    ScreenShotList = ScreenShots,
                     ScheduleTime = schedule.GetScheduleTime(),
                     time = schedule.time,
                     alarmTime = schedule.alarmTime
@@ -126,6 +133,7 @@ namespace WindowsFormsApp
                 newSchedule.SetLinkList(schedule.LinkList);
                 newSchedule.SetProgramList(schedule.ProgramList);
                 newSchedule.SetScreenShotList(schedule.ScreenShotList);
+                newSchedule.SetProcessList(schedule.ProcessList);
                 newSchedule.SetScheduleTime(schedule.ScheduleTime);
                 newSchedule.time = schedule.time;
                 newSchedule.alarmTime = schedule.alarmTime;
@@ -159,7 +167,7 @@ namespace WindowsFormsApp
             public List<string> LinkList { get; set; }
             public List<string> ProgramList { get; set; }
             public List<ProcessInfo> ProcessList { get; set; }
-            public List<Image> ScreenShotList { get; set; }
+            public List<string> ScreenShotList { get; set; }
             public DateTime ScheduleTime { get; set; }
             public string time { get; set; }
             public int alarmTime { get; set; }

@@ -6,6 +6,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,7 +84,19 @@ namespace WindowsFormsApp
         public List<ProcessInfo> GetProcessList() => ProcessList;
         public void SetLinkList(List<string> linkList) => LinkList = linkList;
         public void SetProgramList(List<string> programList) => ProgramList = programList;
-        public void SetScreenShotList(List<Image> screenShotList) => ScreenShotList = screenShotList;
+        public void SetProcessList(List<ProcessInfo> processList) => ProcessList = processList;
+        public void SetScreenShotList(List<string> screenShotList)
+        {
+            ScreenShotList = new List<Image>();
+            foreach (string bytes in screenShotList)
+            {
+                byte[] imageBytes = Convert.FromBase64String(bytes);
+                using (MemoryStream ms = new MemoryStream(imageBytes))
+                {
+                    ScreenShotList.Add(Bitmap.FromStream(ms));
+                }
+            }
+        }
         public void SetScheduleTime(DateTime scheduleTime) => ScheduleTime = scheduleTime;
         public void SetIsMake(bool isMake) => IsMake = isMake;
 
