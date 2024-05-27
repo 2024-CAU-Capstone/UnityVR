@@ -79,14 +79,12 @@
           }
         }
       },
-      "Microsoft.Windows.CsWin32/0.3.49-beta": {
+      "Microsoft.Windows.CsWin32/0.3.106": {
         "type": "package",
         "dependencies": {
           "Microsoft.Windows.SDK.Win32Docs": "0.1.42-alpha",
-          "Microsoft.Windows.SDK.Win32Metadata": "55.0.45-preview",
-          "Microsoft.Windows.WDK.Win32Metadata": "0.9.9-experimental",
-          "System.Memory": "4.5.5",
-          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+          "Microsoft.Windows.SDK.Win32Metadata": "60.0.34-preview",
+          "Microsoft.Windows.WDK.Win32Metadata": "0.11.4-experimental"
         },
         "build": {
           "build/netstandard1.0/Microsoft.Windows.CsWin32.props": {}
@@ -108,16 +106,16 @@
           "buildTransitive/netstandard1.0/Microsoft.Windows.SDK.Win32Docs.props": {}
         }
       },
-      "Microsoft.Windows.SDK.Win32Metadata/55.0.45-preview": {
+      "Microsoft.Windows.SDK.Win32Metadata/60.0.34-preview": {
         "type": "package",
         "build": {
           "buildTransitive/netstandard1.0/Microsoft.Windows.SDK.Win32Metadata.props": {}
         }
       },
-      "Microsoft.Windows.WDK.Win32Metadata/0.9.9-experimental": {
+      "Microsoft.Windows.WDK.Win32Metadata/0.11.4-experimental": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Windows.SDK.Win32Metadata": "55.0.45-preview"
+          "Microsoft.Windows.SDK.Win32Metadata": "60.0.34-preview"
         },
         "build": {
           "buildTransitive/netstandard1.0/Microsoft.Windows.WDK.Win32Metadata.props": {}
@@ -164,22 +162,6 @@
         },
         "runtime": {
           "lib/netcoreapp2.0/_._": {}
-        }
-      },
-      "System.Runtime.CompilerServices.Unsafe/6.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0/_._": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll": {
-            "related": ".xml"
-          }
-        },
-        "build": {
-          "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
       "System.Security.AccessControl/4.7.0": {
@@ -374,10 +356,10 @@
         "version.txt"
       ]
     },
-    "Microsoft.Windows.CsWin32/0.3.49-beta": {
-      "sha512": "/iAXplVDKESFyLz/MShuVYVx62YFvFePpq3qrzREl8KScQqG6Z2kV7r9UJTjQS1g+hfy3V+e4m1x9lsu24YNSg==",
+    "Microsoft.Windows.CsWin32/0.3.106": {
+      "sha512": "Mx5fK7uN6fwLR4wUghs6//HonAnwPBNmC2oonyJVhCUlHS/r6SUS3NkBc3+gaQiv+0/9bqdj1oSCKQFkNI+21Q==",
       "type": "package",
-      "path": "microsoft.windows.cswin32/0.3.49-beta",
+      "path": "microsoft.windows.cswin32/0.3.106",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -394,7 +376,7 @@
         "build/Microsoft.Windows.CsWin32.props",
         "build/net20/Microsoft.Windows.CsWin32.props",
         "build/netstandard1.0/Microsoft.Windows.CsWin32.props",
-        "microsoft.windows.cswin32.0.3.49-beta.nupkg.sha512",
+        "microsoft.windows.cswin32.0.3.106.nupkg.sha512",
         "microsoft.windows.cswin32.nuspec",
         "readme.txt",
         "tools/install.ps1",
@@ -419,10 +401,10 @@
         "microsoft.windows.sdk.win32docs.nuspec"
       ]
     },
-    "Microsoft.Windows.SDK.Win32Metadata/55.0.45-preview": {
-      "sha512": "2i1kVIk8rMuMCYtoeYeWbmCRLqNgb63Berac3Gv+J/pjp0oucopasKgLQNslryhsgBl4xex9ENhJX2MXEW5vdA==",
+    "Microsoft.Windows.SDK.Win32Metadata/60.0.34-preview": {
+      "sha512": "TA3DUNi4CTeo+ItTXBnGZFt2159XOGSl0UOlG5vjDj4WHqZjhwYyyUnzOtrbCERiSaP2Hzg7otJNWwOSZgutyA==",
       "type": "package",
-      "path": "microsoft.windows.sdk.win32metadata/55.0.45-preview",
+      "path": "microsoft.windows.sdk.win32metadata/60.0.34-preview",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -434,15 +416,15 @@
         "buildTransitive/net20/Microsoft.Windows.SDK.Win32Metadata.props",
         "buildTransitive/netstandard1.0/Microsoft.Windows.SDK.Win32Metadata.props",
         "images/windows.png",
-        "microsoft.windows.sdk.win32metadata.55.0.45-preview.nupkg.sha512",
+        "microsoft.windows.sdk.win32metadata.60.0.34-preview.nupkg.sha512",
         "microsoft.windows.sdk.win32metadata.nuspec",
         "sdk_license.txt"
       ]
     },
-    "Microsoft.Windows.WDK.Win32Metadata/0.9.9-experimental": {
-      "sha512": "cncPlxLqR25mFOuvpxZPgXgJqRmXyV5eTULj/9w8AQvO/c1xJDEapohRsWkYaia7hCR/EwEzBHr7RU9u93T03w==",
+    "Microsoft.Windows.WDK.Win32Metadata/0.11.4-experimental": {
+      "sha512": "bf5MCmUyZf0gBlYQjx9UpRAZWBkRndyt9XicR+UNLvAUAFTZQbu6YaX/sNKZlR98Grn0gydfh/yT4I3vc0AIQA==",
       "type": "package",
-      "path": "microsoft.windows.wdk.win32metadata/0.9.9-experimental",
+      "path": "microsoft.windows.wdk.win32metadata/0.11.4-experimental",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -454,7 +436,7 @@
         "buildTransitive/net20/Microsoft.Windows.WDK.Win32Metadata.props",
         "buildTransitive/netstandard1.0/Microsoft.Windows.WDK.Win32Metadata.props",
         "images/windows.png",
-        "microsoft.windows.wdk.win32metadata.0.9.9-experimental.nupkg.sha512",
+        "microsoft.windows.wdk.win32metadata.0.11.4-experimental.nupkg.sha512",
         "microsoft.windows.wdk.win32metadata.nuspec",
         "sdk_license.txt"
       ]
@@ -573,31 +555,6 @@
         "system.reflection.emit.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
-      ]
-    },
-    "System.Runtime.CompilerServices.Unsafe/6.0.0": {
-      "sha512": "/iUeP3tq1S0XdNNoMz5C9twLSrM/TH+qElHkXWaPvuNOt+99G75NrV0OS2EqHx5wMN7popYjpc8oTjC1y16DLg==",
-      "type": "package",
-      "path": "system.runtime.compilerservices.unsafe/6.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "buildTransitive/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.targets",
-        "buildTransitive/netcoreapp3.1/_._",
-        "lib/net461/System.Runtime.CompilerServices.Unsafe.dll",
-        "lib/net461/System.Runtime.CompilerServices.Unsafe.xml",
-        "lib/net6.0/System.Runtime.CompilerServices.Unsafe.dll",
-        "lib/net6.0/System.Runtime.CompilerServices.Unsafe.xml",
-        "lib/netcoreapp3.1/System.Runtime.CompilerServices.Unsafe.dll",
-        "lib/netcoreapp3.1/System.Runtime.CompilerServices.Unsafe.xml",
-        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
-        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
-        "system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
-        "system.runtime.compilerservices.unsafe.nuspec",
-        "useSharedDesignerContext.txt"
       ]
     },
     "System.Security.AccessControl/4.7.0": {
@@ -748,7 +705,7 @@
   "projectFileDependencyGroups": {
     "net8.0-windows10.0.17763": [
       "Microsoft.Toolkit.Uwp.Notifications >= 7.1.3",
-      "Microsoft.Windows.CsWin32 >= 0.3.49-beta",
+      "Microsoft.Windows.CsWin32 >= 0.3.106",
       "System.Memory >= 4.5.5"
     ]
   },
@@ -809,7 +766,7 @@
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
             "target": "Package",
-            "version": "[0.3.49-beta, )"
+            "version": "[0.3.106, )"
           },
           "System.Memory": {
             "target": "Package",
@@ -840,7 +797,7 @@
           "Microsoft.Windows.SDK.NET.Ref": {
             "privateAssets": "all"
           },
-          "Microsoft.WindowsDesktop.App.WindowsForms": {
+          "Microsoft.WindowsDesktop.App": {
             "privateAssets": "none"
           }
         },

@@ -5,3 +5,5 @@ WM_HOTKEY
 SetWindowDisplayAffinity
 EnumDisplayMonitors
 IShellFolderViewDual2
+SetForegroundWindow
+GetWindowPlacement

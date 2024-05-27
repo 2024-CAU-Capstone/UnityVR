@@ -44,7 +44,7 @@ namespace WindowsFormsApp
                     processes.Add(new ProcessInfo(process));
                 }
             }
-            List<string> explorerPaths = ExplorerPahtExtract.OpenPaths();
+            List<string> explorerPaths = ExplorerPathExtract.OpenPaths();
             foreach (string path in explorerPaths)
             {
                 processes.Add(new ProcessInfo(path));
