@@ -47,6 +47,7 @@ namespace WindowsFormsApp
                     PInvoke.SetForegroundWindow((HWND)process.MainWindowHandle);
                     SendKeys.SendWait("^{TAB}"); // change focus to next tab
                 }
+                PInvoke.ShowWindow((HWND)process.MainWindowHandle, SHOW_WINDOW_CMD.SW_SHOWMINIMIZED);
             }
             return urls;
         }
