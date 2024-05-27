@@ -202,5 +202,10 @@ namespace WindowsFormsApp
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
+        private void Loadbutton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

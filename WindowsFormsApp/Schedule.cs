@@ -231,5 +231,10 @@ namespace WindowsFormsApp
         {
             time = maskedTextBox1.Text;
         }
+
+        private void LoadButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
