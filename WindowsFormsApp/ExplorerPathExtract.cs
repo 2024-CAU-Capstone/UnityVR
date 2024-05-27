@@ -8,7 +8,7 @@ using Windows.Win32.UI.Shell;
 
 namespace WindowsFormsApp
 {
-    internal class ExplorerPahtExtract
+    internal class ExplorerPathExtract
     {
         public static List<string> OpenPaths()
         {

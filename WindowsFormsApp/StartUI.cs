@@ -27,6 +27,7 @@ namespace WindowsFormsApp
             hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F12);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F11);
+            hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_SHIFT, (uint)Keys.B);
         }
         #region public method
         public void AddMemo(Memo memo) => MemoList.Add(memo);
@@ -197,6 +198,10 @@ namespace WindowsFormsApp
             {
                 Schedule schedule = new Schedule(this);
                 schedule.Show();
+            }
+            else if (e.Key == (uint)Keys.B)
+            {
+                List<string> urls = BrowserUrlExtract.OpenUrls();
             }
         }
         #endregion
