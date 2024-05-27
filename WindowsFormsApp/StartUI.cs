@@ -46,6 +46,8 @@ namespace WindowsFormsApp
             MemoList = new List<Memo>();
             ScheduleList = new List<Schedule>();
             date = DateTime.Now;
+            ObjectSerialization objs = new ObjectSerialization(MemoList, ScheduleList);
+            objs.LoadData(this);
             LoadMemoAndSchedule(date);
         }
 
@@ -203,6 +205,16 @@ namespace WindowsFormsApp
             {
                 List<string> urls = BrowserUrlExtract.OpenUrls();
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.S))
+            {
+                ObjectSerialization objs = new ObjectSerialization(MemoList, ScheduleList);
+                objs.SaveData();
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
         #endregion
     }
