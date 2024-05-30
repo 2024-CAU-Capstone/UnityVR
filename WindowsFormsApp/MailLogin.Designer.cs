@@ -91,6 +91,7 @@
             EmailInsert.TabIndex = 5;
             EmailInsert.Text = "정보 입력";
             EmailInsert.UseVisualStyleBackColor = true;
+            EmailInsert.Click += EmailInsert_Click;
             // 
             // MailLogin
             // 
@@ -106,6 +107,20 @@
             Size = new Size(317, 164);
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void EmailInsert_Click(object sender, EventArgs e)
+        {
+            bool result = handler.ConnectMail(EmailBox.Text, PasswordBox.Text);
+            if (result)
+            {
+                Close();
+            }
+            else
+            {
+                EmailBox.ResetText();
+                PasswordBox.ResetText();
+            }
         }
 
         #endregion

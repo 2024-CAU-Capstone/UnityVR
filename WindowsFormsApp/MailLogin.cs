@@ -10,11 +10,14 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp
 {
-    public partial class MailLogin : UserControl
+    public partial class MailLogin : Form
     {
-        public MailLogin()
+        MailHandler handler;
+        public MailLogin(MailHandler mailHandler)
         {
             InitializeComponent();
+            this.handler = mailHandler;
         }
+
     }
 }

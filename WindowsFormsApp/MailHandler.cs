@@ -51,22 +51,42 @@ namespace WindowsFormsApp
 
         public bool isAccountInfoInserted() { return idValue.Contains("@"); }
 
-        public void ConnectMail(string setId, string setPw)
+        public bool ConnectMail(string setId, string setPw)
         {
-            if (idValue.Contains("gmail.com"))
+            if (!(setId.Contains("@gmail.com") || setId.Contains("@naver.com"))) return false;
+            if (idValue.Contains("@gmail.com"))
             {
                 smtpClient.Connect("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-                smtpClient.Authenticate(setId, setPw);
                 imapClient.Connect("imap.gmail.com", 993, true);
-                imapClient.Authenticate(setId, setPw);
+                try
+                {
+                    smtpClient.Authenticate(setId, setPw);
+                    imapClient.Authenticate(setId, setPw);
+                } catch (MailKit.Security.AuthenticationException ex) { return false; }
             }
-            else if (idValue.Contains("naver.com"))
+            else if (idValue.Contains("@naver.com"))
             {
                 smtpClient.Connect("smtp.naver.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-                smtpClient.Authenticate(setId.Split("@")[0], setPw);
                 imapClient.Connect("imap.naver.com", 993, true);
-                imapClient.Authenticate(setId.Split("@")[0], setPw);
+                try
+                {
+                    smtpClient.Authenticate(setId.Split("@")[0], setPw);
+                    imapClient.Authenticate(setId.Split("@")[0], setPw);
+                }
+                catch (MailKit.Security.AuthenticationException ex) { return false; }
             }
+            IdPasswordUpdate(setId, setPw);
+            return true;
+            
+        }
+        private void IdPasswordUpdate(string setId, string setPwd)
+        {
+            string[] arrLine = File.ReadAllLines(mailTextFile);
+            arrLine[0] = setId;
+            arrLine[1] = setPwd;
+            this.idValue = setId;
+            this.passwordValue = setPwd;
+            File.WriteAllLines(mailTextFile, arrLine);
         }
 
         public void DisconnectMail()
