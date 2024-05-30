@@ -195,6 +195,12 @@ namespace WindowsFormsApp
 
         }
 
+        private void SendMail_Click(object sender, EventArgs e)
+        {
+            SendMailPopup sendMailPopup = new SendMailPopup(this.startUI.mailHandler);
+            sendMailPopup.Show();
+        }
+
         private void FilePopUPButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -239,7 +245,7 @@ namespace WindowsFormsApp
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-            this.startUI.mailHandler.SendMail(this);
+            
         }
 
     }

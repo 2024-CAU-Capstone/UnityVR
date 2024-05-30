@@ -46,7 +46,7 @@
             label1.Size = new Size(146, 28);
             label1.TabIndex = 0;
             label1.Text = "메일 주소 선택";
-            label1.Click += label1_Click;
+            
             // 
             // label2
             // 
@@ -57,7 +57,7 @@
             label2.Size = new Size(103, 19);
             label2.TabIndex = 1;
             label2.Text = "신규 메일 추가";
-            label2.Click += label2_Click;
+            
             // 
             // NewMailAddress
             // 
@@ -74,6 +74,7 @@
             AddNewMailButton.TabIndex = 3;
             AddNewMailButton.Text = "추가";
             AddNewMailButton.UseVisualStyleBackColor = true;
+            AddNewMailButton.Click += AddNewMailButton_click;
             // 
             // MailSelectionBox
             // 
@@ -102,6 +103,7 @@
             SendMail.TabIndex = 6;
             SendMail.Text = "전송";
             SendMail.UseVisualStyleBackColor = true;
+            SendMail.Click += SendMail_click;
             // 
             // SendMailPopup
             // 

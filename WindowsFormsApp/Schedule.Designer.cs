@@ -224,6 +224,7 @@ namespace WindowsFormsApp
             SendMail.TabIndex = 29;
             SendMail.Text = "메일 전송";
             SendMail.UseVisualStyleBackColor = true;
+            SendMail.Click += SendMail_Click;
             // 
             // Schedule
             // 

@@ -40,13 +40,13 @@ namespace WindowsFormsApp
                     "yyyy-MM-dd HH:mm:ss.fffffff", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal);
                 idValue = lines[1];
                 passwordValue = lines[2];
-                if (idValue.Contains("@"))
-                    ConnectMail(idValue, passwordValue);
                 for (int i = 3; i < lines.Length; i++)
                 {
                     if (lines[i] != "")
                         receiverEmailList.Add(lines[i]);
                 }
+                if (idValue.Contains("@"))
+                    ConnectMail(idValue, passwordValue);
             } 
             else
             {
@@ -91,8 +91,9 @@ namespace WindowsFormsApp
                 }
                 catch (MailKit.Security.AuthenticationException ex) { throw; return false; }
             }
-            
             IdPasswordUpdate(setId, setPw);
+            if (receiverEmailList.Count == 0) AddReceiverEmail(setId);
+
             return true;
             
         }
@@ -111,7 +112,7 @@ namespace WindowsFormsApp
             if (!address.Contains("@")) return false;
             receiverEmailList.Add(address);
             string[] arrLine = File.ReadAllLines(mailTextFile);
-            arrLine[arrLine.Length - 1] = address + "\n";
+            arrLine[arrLine.Length - 1] += "\n" + address;
             File.WriteAllLines(mailTextFile, arrLine);
             return true;
         }
@@ -123,6 +124,7 @@ namespace WindowsFormsApp
 
         public void GetEmails()
         {
+            return;
             try
             {
                 if (!isSmtpEnabled)
@@ -144,7 +146,7 @@ namespace WindowsFormsApp
             return;
         }
 
-        public void SendMail(FilePathTracker filePathTracker)
+        public void SendMail(List<string> mailsToSend)
         {
             try
             {
@@ -159,9 +161,12 @@ namespace WindowsFormsApp
             }
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("Windows_Scheduler", this.idValue));
-            message.To.Add(new MailboxAddress("Windows_Scheduler", this.idValue));
             message.Subject = DateTime.Now.ToString();
             message.Body = new MimeKit.TextPart("text");
+            for (int i = 0; i < mailsToSend.Count; i++)
+            {
+                message.To.Add(new MailboxAddress("Windows_Scheduler", mailsToSend[i]));
+            }
             smtpClient.SendAsync(message);
             isSmtpEnabled = true;
             return;
