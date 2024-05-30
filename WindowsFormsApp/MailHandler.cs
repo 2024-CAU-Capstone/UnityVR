@@ -2,10 +2,14 @@
 using MailKit.Net.Smtp;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
+using System.Windows.Media.TextFormatting;
 
 namespace WindowsFormsApp
 {
@@ -14,10 +18,11 @@ namespace WindowsFormsApp
         private string idValue;
         private string passwordValue;
         static readonly string mailTextFile = @"./mail.txt";
+        private DateTime lastUpdatedDate;
         private SmtpClient smtpClient = new SmtpClient();
         private ImapClient imapClient = new ImapClient();
         
-        public List<string> receiverEmailList = new List<string>();
+        private List<string> receiverEmailList = new List<string>();
 
         public MailHandler() {
             ReadIdPasswordAddress();
@@ -29,11 +34,13 @@ namespace WindowsFormsApp
             if (File.Exists(mailTextFile))
             {
                 string[] lines = File.ReadAllLines(mailTextFile);
-                idValue = lines[0];
-                passwordValue = lines[1];
+                this.lastUpdatedDate = DateTime.ParseExact(lines[0], 
+                    "MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                idValue = lines[1];
+                passwordValue = lines[2];
                 if (idValue.Contains("@"))
                     ConnectMail(idValue, passwordValue);
-                for (int i = 2; i < lines.Length; i++)
+                for (int i = 3; i < lines.Length; i++)
                 {
                     if (lines[i] != "")
                         receiverEmailList.Add(lines[i]);
@@ -43,14 +50,20 @@ namespace WindowsFormsApp
             {
                 using (StreamWriter sw = File.CreateText(mailTextFile))
                 {
-                    sw.Write("/n/n");
+                    string tmpSeconds = DateTime.Now.AddDays(-1).ToString("MM/dd/yyyy HH:mm:ss");
+                    sw.Write(tmpSeconds + "\n\n\n");
                     idValue = "";
                     passwordValue = "";
                 }
             }
         }
 
-        public bool isAccountInfoInserted() { return idValue.Contains("@"); }
+        public bool IsConnected() 
+        {
+            if (smtpClient.IsConnected && imapClient.IsConnected)
+                return true;
+            return ConnectMail(this.idValue, this.passwordValue);
+        }
 
         public bool ConnectMail(string setId, string setPw)
         {
@@ -83,17 +96,43 @@ namespace WindowsFormsApp
         private void IdPasswordUpdate(string setId, string setPwd)
         {
             string[] arrLine = File.ReadAllLines(mailTextFile);
-            arrLine[0] = setId;
-            arrLine[1] = setPwd;
+            arrLine[1] = setId;
+            arrLine[2] = setPwd;
             this.idValue = setId;
             this.passwordValue = setPwd;
             File.WriteAllLines(mailTextFile, arrLine);
         }
 
+        public bool AddReceiverEmail(string address)
+        {
+            if (!address.Contains("@")) return false;
+            receiverEmailList.Add(address);
+            string[] arrLine = File.ReadAllLines(mailTextFile);
+            arrLine[arrLine.Length - 1] = address + "\n";
+            File.WriteAllLines(mailTextFile, arrLine);
+            return true;
+        }
+
+        public List<string> GetReceiverEmailList()
+        {
+            return receiverEmailList;
+        }
+
+        public void GetEmails()
+        {
+            System.Diagnostics.Debug.WriteLine("get email");
+            return;
+        }
+
+        public void SendMail(FilePathTracker filePathTracker)
+        {
+            System.Diagnostics.Debug.WriteLine(filePathTracker.BuildPath());
+        }
+
         public void DisconnectMail()
         {
-            smtpClient.Disconnect(true);
-            imapClient.Disconnect(true);
+            if (smtpClient.IsConnected) smtpClient.Disconnect(true);
+            if (imapClient.IsConnected) imapClient.Disconnect(true);
         }
     }
 }

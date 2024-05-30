@@ -97,6 +97,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(324, 161);
             Controls.Add(EmailInsert);
             Controls.Add(label1);
             Controls.Add(PasswordBox);
@@ -104,7 +105,6 @@
             Controls.Add(PasswordLabel);
             Controls.Add(EmailLabel);
             Name = "MailLogin";
-            Size = new Size(317, 164);
             ResumeLayout(false);
             PerformLayout();
         }

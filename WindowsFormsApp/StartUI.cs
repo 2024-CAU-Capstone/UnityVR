@@ -172,6 +172,7 @@ namespace WindowsFormsApp
         private void ExitProgram(object sender, FormClosingEventArgs e)
         {
             SaveMemoAndSchedule();
+            this.mailHandler.DisconnectMail();
         }
         #endregion
         private void SaveMemoAndSchedule()
@@ -188,6 +189,19 @@ namespace WindowsFormsApp
             date = dateTimePicker1.Value;
             LoadMemoAndSchedule(date);
         }
+
+        private void ReceiveMail_Click(object sender, EventArgs e)
+        {
+            if (!mailHandler.IsConnected())
+            {
+                MailLogin mailLogin = new MailLogin(this.mailHandler);
+                mailLogin.Show();
+                return;
+            }
+            mailHandler.GetEmails();
+        }
+
+        
 
         #region Keyboard Shortcut Definition
         void hook_KeyPressed(object sender, KeyPressedEventArgs e)

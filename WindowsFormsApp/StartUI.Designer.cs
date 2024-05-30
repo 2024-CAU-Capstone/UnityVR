@@ -1,4 +1,6 @@
-﻿namespace WindowsFormsApp
+﻿using System.Runtime.CompilerServices;
+
+namespace WindowsFormsApp
 {
     partial class StartUI
     {
@@ -124,6 +126,7 @@
             ReceiveMail.TabIndex = 9;
             ReceiveMail.Text = "메일 받기";
             ReceiveMail.UseVisualStyleBackColor = true;
+            ReceiveMail.Click += ReceiveMail_Click;
             // 
             // StartUI
             // 
