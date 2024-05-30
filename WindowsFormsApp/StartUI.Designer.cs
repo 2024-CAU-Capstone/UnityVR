@@ -38,6 +38,7 @@ namespace WindowsFormsApp
             label2 = new Label();
             dateTimePicker1 = new DateTimePicker();
             ReceiveMail = new Button();
+            MailChange = new Button();
             SuspendLayout();
             // 
             // YesterdayButton
@@ -119,20 +120,32 @@ namespace WindowsFormsApp
             // 
             // ReceiveMail
             // 
-            ReceiveMail.Location = new Point(692, 156);
+            ReceiveMail.Location = new Point(692, 172);
             ReceiveMail.Margin = new Padding(3, 4, 3, 4);
             ReceiveMail.Name = "ReceiveMail";
-            ReceiveMail.Size = new Size(96, 41);
+            ReceiveMail.Size = new Size(96, 25);
             ReceiveMail.TabIndex = 9;
             ReceiveMail.Text = "메일 받기";
             ReceiveMail.UseVisualStyleBackColor = true;
             ReceiveMail.Click += ReceiveMail_Click;
+            // 
+            // MailChange
+            // 
+            MailChange.Location = new Point(692, 205);
+            MailChange.Margin = new Padding(3, 4, 3, 4);
+            MailChange.Name = "MailChange";
+            MailChange.Size = new Size(96, 25);
+            MailChange.TabIndex = 10;
+            MailChange.Text = "메일 변경";
+            MailChange.UseVisualStyleBackColor = true;
+            MailChange.Click += MailChange_Click;
             // 
             // StartUI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(801, 338);
+            Controls.Add(MailChange);
             Controls.Add(ReceiveMail);
             Controls.Add(dateTimePicker1);
             Controls.Add(label2);
@@ -160,6 +173,7 @@ namespace WindowsFormsApp
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private Button ReceiveMail;
+        private Button MailChange;
     }
 }
 

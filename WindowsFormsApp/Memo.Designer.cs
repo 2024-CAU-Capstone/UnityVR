@@ -41,6 +41,7 @@
             ApplicationButton = new Button();
             label6 = new Label();
             Loadbutton = new Button();
+            SendMail = new Button();
             SuspendLayout();
             // 
             // label1
@@ -173,11 +174,23 @@
             Loadbutton.UseVisualStyleBackColor = true;
             Loadbutton.Click += Loadbutton_Click;
             // 
+            // SendMail
+            // 
+            SendMail.Location = new Point(693, 58);
+            SendMail.Margin = new Padding(3, 4, 3, 4);
+            SendMail.Name = "SendMail";
+            SendMail.Size = new Size(95, 42);
+            SendMail.TabIndex = 25;
+            SendMail.Text = "메일 전송";
+            SendMail.UseVisualStyleBackColor = true;
+            SendMail.Click += SendMailButton_Click;
+            // 
             // Memo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 371);
+            Controls.Add(SendMail);
             Controls.Add(Loadbutton);
             Controls.Add(ApplicationButton);
             Controls.Add(label6);
@@ -213,5 +226,6 @@
         private Button ApplicationButton;
         private Label label6;
         private Button Loadbutton;
+        private Button SendMail;
     }
 }

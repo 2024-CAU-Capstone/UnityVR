@@ -47,6 +47,7 @@ namespace WindowsFormsApp
             label9 = new Label();
             maskedTextBox1 = new MaskedTextBox();
             LoadButton = new Button();
+            SendMail = new Button();
             SuspendLayout();
             // 
             // fileName
@@ -214,9 +215,20 @@ namespace WindowsFormsApp
             LoadButton.UseVisualStyleBackColor = true;
             LoadButton.Click += LoadButton_Click;
             // 
+            // SendMail
+            // 
+            SendMail.Location = new Point(630, 178);
+            SendMail.Margin = new Padding(3, 4, 3, 4);
+            SendMail.Name = "SendMail";
+            SendMail.Size = new Size(95, 42);
+            SendMail.TabIndex = 29;
+            SendMail.Text = "메일 전송";
+            SendMail.UseVisualStyleBackColor = true;
+            // 
             // Schedule
             // 
             ClientSize = new Size(742, 332);
+            Controls.Add(SendMail);
             Controls.Add(LoadButton);
             Controls.Add(maskedTextBox1);
             Controls.Add(label8);
@@ -260,5 +272,6 @@ namespace WindowsFormsApp
         private Label label9;
         private MaskedTextBox maskedTextBox1;
         private Button LoadButton;
+        private Button SendMail;
     }
 }

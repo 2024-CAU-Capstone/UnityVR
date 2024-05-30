@@ -62,6 +62,7 @@
             EmailBox.Name = "EmailBox";
             EmailBox.Size = new Size(228, 23);
             EmailBox.TabIndex = 2;
+            EmailBox.TextChanged += EmailBox_TextChanged;
             // 
             // PasswordBox
             // 

@@ -15,7 +15,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace WindowsFormsApp
 {
-    public partial class Schedule : Form
+    public partial class Schedule : Form, FilePathTracker
     {
         private StartUI startUI;
         private bool IsMake;
@@ -41,6 +41,11 @@ namespace WindowsFormsApp
             this.startUI = startUI;
             InitSchedule();
             InitComboBox();
+        }
+
+        public string BuildPath()
+        {
+            return @".\" + detail;
         }
 
         private void InitSchedule()
@@ -234,7 +239,8 @@ namespace WindowsFormsApp
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-
+            this.startUI.mailHandler.SendMail(this);
         }
+
     }
 }

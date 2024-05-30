@@ -19,5 +19,9 @@ namespace WindowsFormsApp
             this.handler = mailHandler;
         }
 
+        private void EmailBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
