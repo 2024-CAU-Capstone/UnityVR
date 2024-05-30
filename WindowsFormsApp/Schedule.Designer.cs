@@ -46,6 +46,7 @@ namespace WindowsFormsApp
             label8 = new Label();
             label9 = new Label();
             maskedTextBox1 = new MaskedTextBox();
+            LoadButton = new Button();
             SuspendLayout();
             // 
             // fileName
@@ -203,9 +204,20 @@ namespace WindowsFormsApp
             maskedTextBox1.ValidatingType = typeof(DateTime);
             maskedTextBox1.TextChanged += maskedTextBox1TextChanged;
             // 
+            // LoadButton
+            // 
+            LoadButton.Location = new Point(534, 286);
+            LoadButton.Name = "LoadButton";
+            LoadButton.Size = new Size(95, 34);
+            LoadButton.TabIndex = 28;
+            LoadButton.Text = "복구";
+            LoadButton.UseVisualStyleBackColor = true;
+            LoadButton.Click += LoadButton_Click;
+            // 
             // Schedule
             // 
             ClientSize = new Size(742, 332);
+            Controls.Add(LoadButton);
             Controls.Add(maskedTextBox1);
             Controls.Add(label8);
             Controls.Add(label9);
@@ -247,5 +259,6 @@ namespace WindowsFormsApp
         private Label label8;
         private Label label9;
         private MaskedTextBox maskedTextBox1;
+        private Button LoadButton;
     }
 }

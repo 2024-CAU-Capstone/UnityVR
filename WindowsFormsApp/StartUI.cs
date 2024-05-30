@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -28,6 +28,7 @@ namespace WindowsFormsApp
             hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F12);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F11);
+            hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_SHIFT, (uint)Keys.B);
             mailHandler = new MailHandler();
         }
         #region public method
@@ -47,6 +48,8 @@ namespace WindowsFormsApp
             MemoList = new List<Memo>();
             ScheduleList = new List<Schedule>();
             date = DateTime.Now;
+            ObjectSerialization objs = new ObjectSerialization(MemoList, ScheduleList);
+            objs.LoadData(this);
             LoadMemoAndSchedule(date);
         }
 
@@ -200,6 +203,20 @@ namespace WindowsFormsApp
                 Schedule schedule = new Schedule(this);
                 schedule.Show();
             }
+            else if (e.Key == (uint)Keys.B)
+            {
+                List<string> urls = BrowserUrlExtract.OpenUrls();
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.S))
+            {
+                ObjectSerialization objs = new ObjectSerialization(MemoList, ScheduleList);
+                objs.SaveData();
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
         #endregion
     }

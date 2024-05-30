@@ -40,6 +40,7 @@
             fileName = new Label();
             ApplicationButton = new Button();
             label6 = new Label();
+            Loadbutton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -161,11 +162,23 @@
             label6.TabIndex = 22;
             label6.Text = "어플리케이션 지정 : ";
             // 
+            // Loadbutton
+            // 
+            Loadbutton.Location = new Point(592, 316);
+            Loadbutton.Margin = new Padding(3, 4, 3, 4);
+            Loadbutton.Name = "Loadbutton";
+            Loadbutton.Size = new Size(95, 42);
+            Loadbutton.TabIndex = 24;
+            Loadbutton.Text = "복구";
+            Loadbutton.UseVisualStyleBackColor = true;
+            Loadbutton.Click += Loadbutton_Click;
+            // 
             // Memo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 371);
+            Controls.Add(Loadbutton);
             Controls.Add(ApplicationButton);
             Controls.Add(label6);
             Controls.Add(fileName);
@@ -199,5 +212,6 @@
         private System.Windows.Forms.Label fileName;
         private Button ApplicationButton;
         private Label label6;
+        private Button Loadbutton;
     }
 }

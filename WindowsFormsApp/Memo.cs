@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,6 +60,7 @@ namespace WindowsFormsApp
             ScreenShotList = savedmemo.ScreenShotList;
             MemoTime = savedmemo.MemoTime;
             IsMake = false;
+            ProcessList = savedmemo.ProcessList;
             /////////////////////////////
             MakeCheckBox();
             ShowLink();
@@ -77,7 +79,19 @@ namespace WindowsFormsApp
         public List<ProcessInfo> GetProcessList() => ProcessList;
         public void SetLinkList(List<string> linkList) => LinkList = linkList;
         public void SetProgramList(List<string> programList) => ProgramList = programList;
-        public void SetScreenShotList(List<Image> screenShotList) => ScreenShotList = screenShotList;
+        public void SetProcessList(List<ProcessInfo> processList) => ProcessList = processList;
+        public void SetScreenShotList(List<string> screenShotList)
+        {
+            ScreenShotList = new List<Image>();
+            foreach (string bytes in screenShotList)
+            {
+                byte[] imageBytes = Convert.FromBase64String(bytes);
+                using (MemoryStream ms = new MemoryStream(imageBytes))
+                {
+                    ScreenShotList.Add(Bitmap.FromStream(ms));
+                }
+            }
+        }
         public void SetMemoTime(DateTime memoTime) => MemoTime = memoTime;
         public void SetIsMake(bool isMake) => IsMake = isMake;
         public void ShowLink()
@@ -126,7 +140,7 @@ namespace WindowsFormsApp
                 Graphics graphics = Graphics.FromImage(bitmap);
                 graphics.CopyFromScreen(rectangle.Left, rectangle.Top, 0, 0, rectangle.Size);
                 ScreenShotList.Add(bitmap);
-                bitmap.Dispose();
+                //bitmap.Dispose();
             }
         }
 
@@ -175,6 +189,23 @@ namespace WindowsFormsApp
         public string BuildPath()
         {
             return @".\" + detail;
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.Alt | Keys.R))
+            {
+                foreach (ProcessInfo processInfo in ProcessList)
+                {
+                    processInfo.Run();
+                }
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void Loadbutton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

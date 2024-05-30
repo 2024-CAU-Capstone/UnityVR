@@ -16,7 +16,7 @@ namespace WindowsFormsApp
             "TextInputHost",
             "SystemSettings",
             "ApplicationFrameHost",
-            "Explorer"
+            "Explorer",
         };
         //호출 순간의 윈도우를 가진 프로세스를 반환, 원리는 MainWindowsHandle이 존재한다면 윈도우가 존재한다고 판단.
         public static List<ProcessInfo> GetWindowedProcesses()
@@ -44,7 +44,7 @@ namespace WindowsFormsApp
                     processes.Add(new ProcessInfo(process));
                 }
             }
-            List<string> explorerPaths = ExplorerPahtExtract.OpenPaths();
+            List<string> explorerPaths = ExplorerPathExtract.OpenPaths();
             foreach (string path in explorerPaths)
             {
                 processes.Add(new ProcessInfo(path));

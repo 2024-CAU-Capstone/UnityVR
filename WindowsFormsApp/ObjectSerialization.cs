@@ -6,9 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Schema;
+using System.IO;
+using Windows.Media.AppRecording;
 
 namespace WindowsFormsApp
 {
@@ -27,9 +30,15 @@ namespace WindowsFormsApp
         {
             List<MemoObject> MemoTemp = new List<MemoObject>();
             List<ScheduleObject> ScheduleTemp = new List<ScheduleObject>();
-
             foreach (var memo in MemoList)
             {
+                List<string> ScreenShots = new List<string>();
+                foreach (Image screenshot in memo.GetScreenShotList())
+                {
+                    MemoryStream ms = new MemoryStream();
+                    screenshot.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                    ScreenShots.Add(Convert.ToBase64String(ms.GetBuffer()));
+                }
                 MemoObject memoObject = new MemoObject
                 {
                     IsMake = false,
@@ -39,7 +48,7 @@ namespace WindowsFormsApp
                     LinkList = memo.GetLinkList(),
                     ProgramList = memo.GetProgramList(),
                     ProcessList = memo.GetProcessList(),
-                    ScreenShotList = memo.GetScreenShotList(),
+                    ScreenShotList = ScreenShots,
                     MemoTime = memo.GetMemoTime()
                 };
                 MemoTemp.Add(memoObject);
@@ -47,6 +56,13 @@ namespace WindowsFormsApp
 
             foreach (var schedule in ScheduleList)
             {
+                List<string> ScreenShots = new List<string>();
+                foreach (Image screenshot in schedule.GetScreenShotList())
+                {
+                    MemoryStream ms = new MemoryStream();
+                    screenshot.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                    ScreenShots.Add(Convert.ToBase64String(ms.GetBuffer()));
+                }
                 ScheduleObject scheduleObject = new ScheduleObject
                 {
                     IsMake = false,
@@ -56,7 +72,7 @@ namespace WindowsFormsApp
                     LinkList = schedule.GetLinkList(),
                     ProgramList = schedule.GetProgramList(),
                     ProcessList = schedule.GetProcessList(),
-                    ScreenShotList = schedule.GetScreenShotList(),
+                    ScreenShotList = ScreenShots,
                     ScheduleTime = schedule.GetScheduleTime(),
                     time = schedule.time,
                     alarmTime = schedule.alarmTime
@@ -73,16 +89,17 @@ namespace WindowsFormsApp
         {
             List<MemoObject> MemoTemp = new List<MemoObject>();
             List<ScheduleObject> ScheduleTemp = new List<ScheduleObject>();
-            string ScheduleJson = File.ReadAllText("Schedule.json");
-            string MemoJson = File.ReadAllText("Memo.json");
+            string ScheduleJson;// = File.ReadAllText(@".\Schedule.json");
+            string MemoJson;// = File.ReadAllText(@".\Memo.json");
 
             try
             {
-                ScheduleJson = File.ReadAllText("Schedule.json");
-                MemoJson = File.ReadAllText("Memo.json");
+                ScheduleJson = File.ReadAllText(@".\Schedule.json");
+                MemoJson = File.ReadAllText(@".\Memo.json");
             }
             catch (Exception e)
             {
+                return;
                 if (e is FileNotFoundException) throw new Exception("파일을 찾지 못했습니다.");
                 else throw new Exception("파일을 불러오는데 실패했습니다.");
             }
@@ -100,6 +117,7 @@ namespace WindowsFormsApp
                 newMemo.SetLinkList(memo.LinkList);
                 newMemo.SetProgramList(memo.ProgramList);
                 newMemo.SetScreenShotList(memo.ScreenShotList);
+                newMemo.SetProcessList(memo.ProcessList);
                 newMemo.SetMemoTime(memo.MemoTime);
                 newMemo.SetIsMake(memo.IsMake);
 
@@ -115,6 +133,7 @@ namespace WindowsFormsApp
                 newSchedule.SetLinkList(schedule.LinkList);
                 newSchedule.SetProgramList(schedule.ProgramList);
                 newSchedule.SetScreenShotList(schedule.ScreenShotList);
+                newSchedule.SetProcessList(schedule.ProcessList);
                 newSchedule.SetScheduleTime(schedule.ScheduleTime);
                 newSchedule.time = schedule.time;
                 newSchedule.alarmTime = schedule.alarmTime;
@@ -125,33 +144,33 @@ namespace WindowsFormsApp
         }
 
         [Serializable]
-        private class MemoObject
+        public class MemoObject
         {
-            public bool IsMake;
-            public string detail;
-            public string file;
-            public string fileFullPath;
-            public List<string> LinkList;
-            public List<string> ProgramList;
-            public List<ProcessInfo> ProcessList;
-            public List<Image> ScreenShotList;
-            public DateTime MemoTime;
+            public bool IsMake { get; set; }
+            public string detail { get; set; }
+            public string file { get; set; }
+            public string fileFullPath { get; set; }
+            public List<string> LinkList {  get; set; }
+            public List<string> ProgramList {  get; set; }
+            public List<ProcessInfo> ProcessList { get; set; }
+            public List<string> ScreenShotList { get; set; }
+            public DateTime MemoTime {  get; set; }
         }
 
         [Serializable]
-        private class ScheduleObject
+        public class ScheduleObject
         {
-            public bool IsMake;
-            public string detail;
-            public string file;
-            public string fileFullPath;
-            public List<string> LinkList;
-            public List<string> ProgramList;
-            public List<ProcessInfo> ProcessList;
-            public List<Image> ScreenShotList;
-            public DateTime ScheduleTime;
-            public string time;
-            public int alarmTime;
+            public bool IsMake { get; set; }
+            public string detail { get; set; }
+            public string file { get; set; }
+            public string fileFullPath { get; set; }
+            public List<string> LinkList { get; set; }
+            public List<string> ProgramList { get; set; }
+            public List<ProcessInfo> ProcessList { get; set; }
+            public List<string> ScreenShotList { get; set; }
+            public DateTime ScheduleTime { get; set; }
+            public string time { get; set; }
+            public int alarmTime { get; set; }
         }
 
 
