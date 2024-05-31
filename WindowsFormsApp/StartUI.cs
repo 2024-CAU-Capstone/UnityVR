@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Windows.Forms;
-using Windows.Win32.UI.Input.KeyboardAndMouse;
-using Windows.Win32.UI.WindowsAndMessaging;
 using Windows.Win32;
 using Windows.Win32.Foundation;
+using Windows.Win32.UI.Input.KeyboardAndMouse;
+using Windows.Win32.UI.WindowsAndMessaging;
 
 namespace WindowsFormsApp
 {
@@ -18,6 +12,7 @@ namespace WindowsFormsApp
         private List<Schedule> ScheduleList;
         private DateTime date;
         KeyboardHook hook;
+        public MailHandler mailHandler;
 
         public StartUI()
         {
@@ -28,6 +23,7 @@ namespace WindowsFormsApp
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F12);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F11);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_SHIFT, (uint)Keys.B);
+            mailHandler = new MailHandler();
         }
         #region public method
         public void AddMemo(Memo memo) => MemoList.Add(memo);
@@ -53,7 +49,7 @@ namespace WindowsFormsApp
 
         private void MakeMomoUI()
         {
-            if(MemoList.Count == 0) return;
+            if (MemoList.Count == 0) return;
             int count = 0;
             for (int i = 0; i < MemoList.Count; i++)//test
             {
@@ -84,12 +80,12 @@ namespace WindowsFormsApp
             int count = 0;
             for (int i = 0; i < ScheduleList.Count; i++)
             {
-                
+
                 if (ScheduleList[i].GetScheduleTime().DayOfYear != date.DayOfYear)
                 {
                     continue;
                 }
-                
+
                 Label memoLabel = new Label();
                 Button memoButton = new Button();
                 Schedule schedule = ScheduleList[i];
@@ -112,7 +108,7 @@ namespace WindowsFormsApp
 
             }
         }
-        
+
         #region Button Event
         private void ScheduleListButton_Click(Schedule schedule)
         {
@@ -170,6 +166,7 @@ namespace WindowsFormsApp
         private void ExitProgram(object sender, FormClosingEventArgs e)
         {
             SaveMemoAndSchedule();
+            this.mailHandler.DisconnectMail();
         }
         #endregion
         private void SaveMemoAndSchedule()
@@ -186,6 +183,13 @@ namespace WindowsFormsApp
             date = dateTimePicker1.Value;
             LoadMemoAndSchedule(date);
         }
+
+        private void ReceiveMail_Click(object sender, EventArgs e)
+        {
+            mailHandler.GetEmails();
+        }
+
+
 
         #region Keyboard Shortcut Definition
         void hook_KeyPressed(object sender, KeyPressedEventArgs e)
@@ -217,5 +221,11 @@ namespace WindowsFormsApp
             return base.ProcessCmdKey(ref msg, keyData);
         }
         #endregion
+
+        private void MailChange_Click(object sender, EventArgs e)
+        {
+            MailLogin mailLogin = new MailLogin(this.mailHandler);
+            mailLogin.Show();
+        }
     }
 }

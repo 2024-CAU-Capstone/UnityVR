@@ -15,7 +15,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace WindowsFormsApp
 {
-    public partial class Schedule : Form
+    public partial class Schedule : Form, FilePathTracker
     {
         private StartUI startUI;
         private bool IsMake;
@@ -41,6 +41,11 @@ namespace WindowsFormsApp
             this.startUI = startUI;
             InitSchedule();
             InitComboBox();
+        }
+
+        public string BuildPath()
+        {
+            return @".\" + detail;
         }
 
         private void InitSchedule()
@@ -190,6 +195,12 @@ namespace WindowsFormsApp
 
         }
 
+        private void SendMail_Click(object sender, EventArgs e)
+        {
+            SendMailPopup sendMailPopup = new SendMailPopup(this.startUI.mailHandler);
+            sendMailPopup.Show();
+        }
+
         private void FilePopUPButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -234,7 +245,8 @@ namespace WindowsFormsApp
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-
+            
         }
+
     }
 }

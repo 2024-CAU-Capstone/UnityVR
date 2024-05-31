@@ -186,6 +186,12 @@ namespace WindowsFormsApp
             programPopUp.Show();
         }
 
+        private void SendMailButton_Click(object sender, EventArgs e)
+        {
+            SendMailPopup sendMailPopup = new SendMailPopup(this.startUI.mailHandler);
+            sendMailPopup.Show();
+        }
+
         public string BuildPath()
         {
             return @".\" + detail;

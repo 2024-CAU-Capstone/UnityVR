@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp
 {
-    internal interface FilePathTracker
+    public interface FilePathTracker
     {
         string BuildPath();
     }
