@@ -30,6 +30,7 @@ namespace WindowsFormsApp
         private List<string> ProgramList;
         private List<ProcessInfo> ProcessList;
         private List<Image> ScreenShotList;
+        private List<string> ScreenShotSerial;
 
         private DateTime ScheduleTime;
         /////////////////////////////
@@ -45,7 +46,7 @@ namespace WindowsFormsApp
 
         public string BuildPath()
         {
-            return @".\" + detail;
+            return @".\Schedule\" + detail;
         }
 
         private void InitSchedule()
@@ -54,6 +55,8 @@ namespace WindowsFormsApp
             LinkList = new List<string>();
             ProgramList = new List<string>();
             ProcessList = new List<ProcessInfo>();
+            ScreenShotSerial = new List<string>();
+
             detail = "no detail";
             file = "no file";
             fileFullPath = "no file";
@@ -86,6 +89,7 @@ namespace WindowsFormsApp
         public List<string> GetLinkList() => LinkList;
         public List<string> GetProgramList() => ProgramList;
         public List<Image> GetScreenShotList() => ScreenShotList;
+        public List<string> GetScreenShotSerial() => ScreenShotSerial;
         public List<ProcessInfo> GetProcessList() => ProcessList;
         public void SetLinkList(List<string> linkList) => LinkList = linkList;
         public void SetProgramList(List<string> programList) => ProgramList = programList;

@@ -27,6 +27,7 @@ namespace WindowsFormsApp
         private List<ProcessInfo> ProcessList;
         private List<Image> ScreenShotList;
         private DateTime MemoTime;
+        private List<string> ScreenShotSerial;
         /////////////////////////////
         //unSaved
         private CheckBox[] screenCheckBox;
@@ -50,6 +51,7 @@ namespace WindowsFormsApp
             MemoTime = startUI.GetDate();
             MakeCheckBox();
             IsMake = true;
+            ScreenShotSerial = new List<string>();
         }
         public void InitMemo(Memo savedmemo)
         {
@@ -77,6 +79,7 @@ namespace WindowsFormsApp
         public List<string> GetProgramList() => ProgramList;
         public List<Image> GetScreenShotList() => ScreenShotList;
         public List<ProcessInfo> GetProcessList() => ProcessList;
+        public List<string> GetScreenShotSerial() => ScreenShotSerial;
         public void SetLinkList(List<string> linkList) => LinkList = linkList;
         public void SetProgramList(List<string> programList) => ProgramList = programList;
         public void SetProcessList(List<ProcessInfo> processList) => ProcessList = processList;
@@ -139,6 +142,9 @@ namespace WindowsFormsApp
                 Bitmap bitmap = new Bitmap(rectangle.Width, rectangle.Height, pixelFormat);
                 Graphics graphics = Graphics.FromImage(bitmap);
                 graphics.CopyFromScreen(rectangle.Left, rectangle.Top, 0, 0, rectangle.Size);
+                MemoryStream ms = new MemoryStream();
+                bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                ScreenShotSerial.Add(Convert.ToBase64String(ms.ToArray()));
                 ScreenShotList.Add(bitmap);
                 //bitmap.Dispose();
             }
@@ -194,7 +200,7 @@ namespace WindowsFormsApp
 
         public string BuildPath()
         {
-            return @".\" + detail;
+            return @".\Memo\" + detail;
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
