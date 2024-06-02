@@ -48,6 +48,10 @@ namespace WindowsFormsApp
         {
             return @".\Schedule\" + detail;
         }
+        public void ShowProgram(string text)
+        {
+            appName.Text = text;
+        }
 
         private void InitSchedule()
         {
@@ -137,6 +141,13 @@ namespace WindowsFormsApp
                 CheckBox.Text = "Screen " + (i + 1);
                 CheckBox.Location = new Point(140 + i * 150, 120);
                 CheckBox.Size = new Size(100, 30);
+                if (ScreenShotList[i] != null)
+                {
+                    PictureBox picture = new PictureBox();
+                    picture.Image = ScreenShotList[i];
+                    picture.Location = new Point(130 + i * 150, 165);
+                    picture.Size = new Size(100, 100);
+                }
                 Controls.Add(CheckBox);
                 screenCheckBox[i] = CheckBox;
             }

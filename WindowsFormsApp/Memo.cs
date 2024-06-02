@@ -104,6 +104,10 @@ namespace WindowsFormsApp
                 LinkPopUpButton.Text += LinkList[i] + "  ";
             }
         }
+        public void ShowProgram(string text)
+        {
+            appName.Text = text;
+        }
 
         private void MakeCheckBox()
         {
@@ -111,10 +115,17 @@ namespace WindowsFormsApp
             Screen[] screens = Screen.AllScreens;
             for (int i = 0; i < screens.Length; i++)
             {
-                CheckBox CheckBox = new CheckBox();
+                CheckBox CheckBox = new CheckBox();                            
                 CheckBox.Text = "Screen " + (i + 1);
                 CheckBox.Location = new Point(130 + i * 150, 135);
                 CheckBox.Size = new Size(100, 30);
+                if (ScreenShotList[i] != null)
+                {
+                    PictureBox picture = new PictureBox();
+                    picture.Image = ScreenShotList[i];
+                    picture.Location = new Point(130 + i * 150, 165);
+                    picture.Size = new Size(100, 100);
+                }
                 this.Controls.Add(CheckBox);
                 screenCheckBox[i] = CheckBox;
             }

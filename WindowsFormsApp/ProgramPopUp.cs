@@ -48,18 +48,23 @@ namespace WindowsFormsApp
 
         private void CompleteButton_Click_1(object sender, EventArgs e)
         {
+            StringBuilder program = new StringBuilder();
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
             {
                 if (checkedListBox1.GetItemChecked(i))
                 {
+                    program.Append(checkedListBox1.Items[i].ToString());
+                    program.Append(", ");
                     if (IsSchedule)
                     {
                         schedule.AddProgram(checkedListBox1.Items[i].ToString());
+                        schedule.ShowProgram(program.ToString());
                     }
                     else
                     {
                         memo.AddProgram(checkedListBox1.Items[i].ToString());
-                        memo.AddProcess(ProcessList[i]);
+                        memo.AddProcess(ProcessList[i]);                      
+                        memo.ShowProgram(program.ToString());
                     }                
                 }
             }

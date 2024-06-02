@@ -42,25 +42,26 @@
             label6 = new Label();
             Loadbutton = new Button();
             SendMail = new Button();
+            appName = new Label();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label1.Font = new Font("맑은 고딕", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
             label1.Location = new Point(12, 11);
             label1.Name = "label1";
-            label1.Size = new Size(73, 21);
+            label1.Size = new Size(74, 30);
             label1.TabIndex = 0;
             label1.Text = "내용 : ";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label2.Font = new Font("맑은 고딕", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
             label2.Location = new Point(12, 62);
             label2.Name = "label2";
-            label2.Size = new Size(73, 21);
+            label2.Size = new Size(74, 30);
             label2.TabIndex = 1;
             label2.Text = "링크 : ";
             // 
@@ -86,20 +87,20 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label3.Font = new Font("맑은 고딕", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
             label3.Location = new Point(12, 139);
             label3.Name = "label3";
-            label3.Size = new Size(115, 21);
+            label3.Size = new Size(116, 30);
             label3.TabIndex = 4;
             label3.Text = "스크린샷 : ";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label4.Font = new Font("맑은 고딕", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
             label4.Location = new Point(12, 234);
             label4.Name = "label4";
-            label4.Size = new Size(122, 21);
+            label4.Size = new Size(123, 30);
             label4.TabIndex = 5;
             label4.Text = "파일 추가 : ";
             // 
@@ -128,12 +129,12 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("굴림", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 129);
-            label5.Location = new Point(689, 11);
+            label5.Font = new Font("맑은 고딕", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            label5.Location = new Point(660, 13);
             label5.Name = "label5";
-            label5.Size = new Size(106, 21);
+            label5.Size = new Size(125, 30);
             label5.TabIndex = 8;
-            label5.Text = "메모 추가";
+            label5.Text = "스냅샷 추가";
             // 
             // fileName
             // 
@@ -156,10 +157,10 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label6.Font = new Font("맑은 고딕", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
             label6.Location = new Point(14, 324);
             label6.Name = "label6";
-            label6.Size = new Size(206, 21);
+            label6.Size = new Size(207, 30);
             label6.TabIndex = 22;
             label6.Text = "어플리케이션 지정 : ";
             // 
@@ -185,11 +186,20 @@
             SendMail.UseVisualStyleBackColor = true;
             SendMail.Click += SendMailButton_Click;
             // 
+            // appName
+            // 
+            appName.AutoSize = true;
+            appName.Location = new Point(359, 331);
+            appName.Name = "appName";
+            appName.Size = new Size(0, 15);
+            appName.TabIndex = 26;
+            // 
             // Memo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 371);
+            Controls.Add(appName);
             Controls.Add(SendMail);
             Controls.Add(Loadbutton);
             Controls.Add(ApplicationButton);
@@ -227,5 +237,6 @@
         private Label label6;
         private Button Loadbutton;
         private Button SendMail;
+        private Label appName;
     }
 }

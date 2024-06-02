@@ -48,6 +48,7 @@ namespace WindowsFormsApp
             maskedTextBox1 = new MaskedTextBox();
             LoadButton = new Button();
             SendMail = new Button();
+            appName = new Label();
             SuspendLayout();
             // 
             // fileName
@@ -61,10 +62,10 @@ namespace WindowsFormsApp
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("굴림", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            label5.Font = new Font("맑은 고딕", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 129);
             label5.Location = new Point(624, 9);
             label5.Name = "label5";
-            label5.Size = new Size(106, 21);
+            label5.Size = new Size(104, 30);
             label5.TabIndex = 18;
             label5.Text = "일정 추가";
             // 
@@ -91,20 +92,20 @@ namespace WindowsFormsApp
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label4.Font = new Font("맑은 고딕", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
             label4.Location = new Point(23, 199);
             label4.Name = "label4";
-            label4.Size = new Size(122, 21);
+            label4.Size = new Size(123, 30);
             label4.TabIndex = 15;
             label4.Text = "파일 추가 : ";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label3.Font = new Font("맑은 고딕", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
             label3.Location = new Point(23, 123);
             label3.Name = "label3";
-            label3.Size = new Size(115, 21);
+            label3.Size = new Size(116, 30);
             label3.TabIndex = 14;
             label3.Text = "스크린샷 : ";
             // 
@@ -148,10 +149,10 @@ namespace WindowsFormsApp
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label6.Font = new Font("맑은 고딕", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
             label6.Location = new Point(23, 286);
             label6.Name = "label6";
-            label6.Size = new Size(206, 21);
+            label6.Size = new Size(207, 30);
             label6.TabIndex = 20;
             label6.Text = "어플리케이션 지정 : ";
             // 
@@ -177,20 +178,20 @@ namespace WindowsFormsApp
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label8.Font = new Font("맑은 고딕", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
             label8.Location = new Point(12, 55);
             label8.Name = "label8";
-            label8.Size = new Size(73, 21);
+            label8.Size = new Size(74, 30);
             label8.TabIndex = 25;
             label8.Text = "링크 : ";
             // 
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new Font("굴림", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label9.Font = new Font("맑은 고딕", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 129);
             label9.Location = new Point(12, 14);
             label9.Name = "label9";
-            label9.Size = new Size(73, 21);
+            label9.Size = new Size(74, 30);
             label9.TabIndex = 24;
             label9.Text = "내용 : ";
             // 
@@ -226,9 +227,18 @@ namespace WindowsFormsApp
             SendMail.UseVisualStyleBackColor = true;
             SendMail.Click += SendMail_Click;
             // 
+            // appName
+            // 
+            appName.AutoSize = true;
+            appName.Location = new Point(368, 293);
+            appName.Name = "appName";
+            appName.Size = new Size(0, 15);
+            appName.TabIndex = 30;
+            // 
             // Schedule
             // 
             ClientSize = new Size(742, 332);
+            Controls.Add(appName);
             Controls.Add(SendMail);
             Controls.Add(LoadButton);
             Controls.Add(maskedTextBox1);
@@ -274,5 +284,6 @@ namespace WindowsFormsApp
         private MaskedTextBox maskedTextBox1;
         private Button LoadButton;
         private Button SendMail;
+        private Label appName;
     }
 }
