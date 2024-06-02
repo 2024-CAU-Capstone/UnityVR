@@ -58,13 +58,15 @@ namespace WindowsFormsApp
                     if (IsSchedule)
                     {
                         schedule.AddProgram(checkedListBox1.Items[i].ToString());
-                        schedule.ShowProgram(program.ToString());
+                        schedule.applicationName = program.ToString();
+                        schedule.SetProcess(program.ToString());
                     }
                     else
                     {
                         memo.AddProgram(checkedListBox1.Items[i].ToString());
                         memo.AddProcess(ProcessList[i]);                      
-                        memo.ShowProgram(program.ToString());
+                        memo.applicationName = program.ToString();
+                        memo.SetProcess(program.ToString());
                     }                
                 }
             }

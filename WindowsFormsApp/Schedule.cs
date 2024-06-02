@@ -24,6 +24,7 @@ namespace WindowsFormsApp
         public string file;
         public string fileFullPath;
         public string time;
+        public string applicationName;
         public int alarmTime;
 
         private List<string> LinkList;
@@ -48,10 +49,6 @@ namespace WindowsFormsApp
         {
             return @".\Schedule\" + detail;
         }
-        public void ShowProgram(string text)
-        {
-            appName.Text = text;
-        }
 
         private void InitSchedule()
         {
@@ -60,7 +57,6 @@ namespace WindowsFormsApp
             ProgramList = new List<string>();
             ProcessList = new List<ProcessInfo>();
             ScreenShotSerial = new List<string>();
-
             detail = "no detail";
             file = "no file";
             fileFullPath = "no file";
@@ -85,6 +81,7 @@ namespace WindowsFormsApp
             ContentText.Text = detail;
             maskedTextBox1.Text = time;
             fileName.Text = file;
+            appName.Text = saveSchedule.applicationName;
             ScheduleTime = saveSchedule.ScheduleTime;
         }
         public void AddLink(string link) => LinkList.Add(link);
@@ -95,6 +92,7 @@ namespace WindowsFormsApp
         public List<Image> GetScreenShotList() => ScreenShotList;
         public List<string> GetScreenShotSerial() => ScreenShotSerial;
         public List<ProcessInfo> GetProcessList() => ProcessList;
+        public void SetProcess(string process) => appName.Text = process;
         public void SetLinkList(List<string> linkList) => LinkList = linkList;
         public void SetProgramList(List<string> programList) => ProgramList = programList;
         public void SetProcessList(List<ProcessInfo> processList) => ProcessList = processList;
@@ -141,7 +139,7 @@ namespace WindowsFormsApp
                 CheckBox.Text = "Screen " + (i + 1);
                 CheckBox.Location = new Point(140 + i * 150, 120);
                 CheckBox.Size = new Size(100, 30);
-                if (ScreenShotList[i] != null)
+                if (ScreenShotList.Count > i)
                 {
                     PictureBox picture = new PictureBox();
                     picture.Image = ScreenShotList[i];
@@ -191,13 +189,18 @@ namespace WindowsFormsApp
                 detail = ContentText.Text;
                 startUI.AddSchedule(this);
                 startUI.LoadMemoAndSchedule(startUI.GetDate());
-                new ToastContentBuilder()
+                if(detail != null && time != null && alarmTime != 0)
+                {
+                    new ToastContentBuilder()
                     .AddText("일정 알림")
                     .AddText("일정 : " + detail)
                     .AddText("시간 : " + time)
                     .SetToastScenario(ToastScenario.Alarm)
+                    .AddButton(new ToastButton()
+                        .SetContent("확인")
+                        .AddArgument("action", "viewConversation"))
                     .Schedule(date);
-
+                }               
             }
             Close();
         }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -22,6 +24,7 @@ namespace WindowsFormsApp
         public string detail;
         public string file;
         public string fileFullPath;
+        public string applicationName;
         private List<string> LinkList;
         private List<string> ProgramList;
         private List<ProcessInfo> ProcessList;
@@ -63,23 +66,25 @@ namespace WindowsFormsApp
             MemoTime = savedmemo.MemoTime;
             IsMake = false;
             ProcessList = savedmemo.ProcessList;
+            appName.Text = savedmemo.appName.Text;
+            applicationName = savedmemo.applicationName;
             /////////////////////////////
             MakeCheckBox();
             ShowLink();
             ContentText.Text = detail;
-            fileName.Text = file;
-
+            fileName.Text = file;          
+            appName.Text = applicationName;
         }
         public void AddLink(string link) => LinkList.Add(link);
         public void AddProgram(string program) => ProgramList.Add(program);
         public void AddProcess(ProcessInfo process) => ProcessList.Add(process);
         public DateTime GetMemoTime() => MemoTime;
-
         public List<string> GetLinkList() => LinkList;
         public List<string> GetProgramList() => ProgramList;
         public List<Image> GetScreenShotList() => ScreenShotList;
         public List<ProcessInfo> GetProcessList() => ProcessList;
         public List<string> GetScreenShotSerial() => ScreenShotSerial;
+        public void SetProcess(string process) => appName.Text = process;
         public void SetLinkList(List<string> linkList) => LinkList = linkList;
         public void SetProgramList(List<string> programList) => ProgramList = programList;
         public void SetProcessList(List<ProcessInfo> processList) => ProcessList = processList;
@@ -104,10 +109,6 @@ namespace WindowsFormsApp
                 LinkPopUpButton.Text += LinkList[i] + "  ";
             }
         }
-        public void ShowProgram(string text)
-        {
-            appName.Text = text;
-        }
 
         private void MakeCheckBox()
         {
@@ -119,7 +120,8 @@ namespace WindowsFormsApp
                 CheckBox.Text = "Screen " + (i + 1);
                 CheckBox.Location = new Point(130 + i * 150, 135);
                 CheckBox.Size = new Size(100, 30);
-                if (ScreenShotList[i] != null)
+                Debug.WriteLine(ScreenShotList.Count);
+                if (ScreenShotList.Count > i)
                 {
                     PictureBox picture = new PictureBox();
                     picture.Image = ScreenShotList[i];
@@ -156,9 +158,10 @@ namespace WindowsFormsApp
                 MemoryStream ms = new MemoryStream();
                 bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
                 ScreenShotSerial.Add(Convert.ToBase64String(ms.ToArray()));
-                ScreenShotList.Add(bitmap);
+                ScreenShotList.Add(bitmap);               
                 //bitmap.Dispose();
             }
+            Debug.WriteLine("ScreenShotCount: " + ScreenShotList.Count);
         }
 
         private void CompletedButton_Click(object sender, EventArgs e)

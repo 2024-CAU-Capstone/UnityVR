@@ -46,10 +46,10 @@ namespace WindowsFormsApp
             YesterdayButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             YesterdayButton.BackgroundImage = Properties.Resources.LeftArrow;
             YesterdayButton.BackgroundImageLayout = ImageLayout.Stretch;
-            YesterdayButton.Location = new Point(12, 9);
+            YesterdayButton.Location = new Point(12, 17);
             YesterdayButton.Margin = new Padding(3, 4, 3, 4);
             YesterdayButton.Name = "YesterdayButton";
-            YesterdayButton.Size = new Size(34, 42);
+            YesterdayButton.Size = new Size(34, 24);
             YesterdayButton.TabIndex = 0;
             YesterdayButton.UseVisualStyleBackColor = true;
             YesterdayButton.Click += YesterdayButton_Click;
@@ -59,10 +59,10 @@ namespace WindowsFormsApp
             NextdayButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             NextdayButton.BackgroundImage = Properties.Resources.RightArrow;
             NextdayButton.BackgroundImageLayout = ImageLayout.Stretch;
-            NextdayButton.Location = new Point(235, 9);
+            NextdayButton.Location = new Point(235, 15);
             NextdayButton.Margin = new Padding(3, 4, 3, 4);
             NextdayButton.Name = "NextdayButton";
-            NextdayButton.Size = new Size(34, 41);
+            NextdayButton.Size = new Size(34, 24);
             NextdayButton.TabIndex = 1;
             NextdayButton.UseVisualStyleBackColor = true;
             NextdayButton.Click += NextdayButton_Click;
@@ -74,7 +74,7 @@ namespace WindowsFormsApp
             MakeMemoButton.Name = "MakeMemoButton";
             MakeMemoButton.Size = new Size(96, 41);
             MakeMemoButton.TabIndex = 4;
-            MakeMemoButton.Text = "메모 만들기";
+            MakeMemoButton.Text = "스냅샷 만들기";
             MakeMemoButton.UseVisualStyleBackColor = true;
             MakeMemoButton.Click += MakeMemoButton_Click;
             // 
@@ -92,26 +92,26 @@ namespace WindowsFormsApp
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("굴림", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label1.Font = new Font("맑은 고딕", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 129);
             label1.Location = new Point(369, 93);
             label1.Name = "label1";
-            label1.Size = new Size(110, 19);
+            label1.Size = new Size(133, 25);
             label1.TabIndex = 6;
-            label1.Text = "미정리 메모";
+            label1.Text = "미정리 스냅샷";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("굴림", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            label2.Font = new Font("맑은 고딕", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 129);
             label2.Location = new Point(12, 93);
             label2.Name = "label2";
-            label2.Size = new Size(47, 19);
+            label2.Size = new Size(50, 25);
             label2.TabIndex = 7;
             label2.Text = "일정";
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(51, 17);
+            dateTimePicker1.Location = new Point(51, 16);
             dateTimePicker1.Margin = new Padding(2);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(179, 23);

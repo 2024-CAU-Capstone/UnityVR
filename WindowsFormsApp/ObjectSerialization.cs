@@ -61,7 +61,8 @@ namespace WindowsFormsApp
                     ProcessList = memo.GetProcessList(),
                     ScreenShotList = ScreenShots,
                     MemoTime = memo.GetMemoTime(),
-                    savePath = memo.BuildPath()
+                    savePath = memo.BuildPath(),
+                    saveProcessText = memo.applicationName,
                 };
                 MemoTemp.Add(memoObject);
             }
@@ -89,7 +90,8 @@ namespace WindowsFormsApp
                     ScheduleTime = schedule.GetScheduleTime(),
                     time = schedule.time,
                     alarmTime = schedule.alarmTime,
-                    savePath = schedule.BuildPath()
+                    savePath = schedule.BuildPath(),
+                    saveProcessText = schedule.applicationName
                 };
                 ScheduleTemp.Add(scheduleObject);
             }
@@ -167,6 +169,7 @@ namespace WindowsFormsApp
                 newSchedule.detail = schedule.detail;
                 newSchedule.file = schedule.file;
                 newSchedule.fileFullPath = schedule.fileFullPath;
+                newSchedule.applicationName = schedule.saveProcessText;
                 newSchedule.SetLinkList(schedule.LinkList);
                 newSchedule.SetProgramList(schedule.ProgramList);
                 newSchedule.SetScreenShotList(schedule.ScreenShotList);
@@ -193,6 +196,7 @@ namespace WindowsFormsApp
             public List<string> ScreenShotList { get; set; }
             public DateTime MemoTime {  get; set; }
             public string savePath { get; set; }
+            public string saveProcessText { get; set; }
         }
 
         [Serializable]
@@ -210,6 +214,8 @@ namespace WindowsFormsApp
             public string time { get; set; }
             public int alarmTime { get; set; }
             public string savePath { get; set; }
+            public string saveProcessText { get; set; }
+
         }
 
 
