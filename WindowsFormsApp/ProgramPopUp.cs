@@ -70,6 +70,19 @@ namespace WindowsFormsApp
                     }                
                 }
             }
+            List<string> documents = DocumentExtract.OpenDocuments();
+            foreach (string document in documents)
+            {
+                ProcessInfo doc = new ProcessInfo("word", document);
+                if (IsSchedule)
+                {
+                    schedule.AddProcess(doc);
+                }
+                else
+                {
+                    memo.AddProcess(doc);
+                }
+            }
             Close();
         }
     }
