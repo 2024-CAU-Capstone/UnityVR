@@ -15,12 +15,14 @@ namespace WindowsFormsApp
         private Memo memo;
         private Schedule schedule;
         private bool IsSchedule;
+        private List<string> urls;
 
         public PopUp(Memo memo)
         {
             InitializeComponent();
             this.memo = memo;
             IsSchedule = false;
+            urls = new List<string>();
             InitPopUp();
         }
         public PopUp(Schedule schedule)
@@ -34,13 +36,16 @@ namespace WindowsFormsApp
         private void InitPopUp()
         {
             GetLinkList();
-            checkedListBox1.Items.Add("Link example A");
-            checkedListBox1.Items.Add("Link example B");
+            foreach (string url in urls)
+            {
+                checkedListBox1.Items.Add(url);
+            }
         }
 
         protected void GetLinkList()
         {
             //링크 목록을 받아오는 코드 추가 필요
+            urls = BrowserUrlExtract.OpenUrls();
         }
 
         private void CompleteButton_Click(object sender, EventArgs e)
@@ -55,6 +60,8 @@ namespace WindowsFormsApp
                     }
                 }
                 memo.ShowLink();
+                ProcessInfo urlInfo = new ProcessInfo(memo.GetLinkList());
+                memo.AddProcess(urlInfo);
             }
             else
             {
@@ -66,6 +73,8 @@ namespace WindowsFormsApp
                     }
                 }
                 schedule.ShowLink();
+                ProcessInfo urlInfo = new ProcessInfo(schedule.GetLinkList());
+                schedule.AddProcess(urlInfo);
             }
            
             Close();

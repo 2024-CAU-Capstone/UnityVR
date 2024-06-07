@@ -231,7 +231,10 @@ namespace WindowsFormsApp
 
         private void Loadbutton_Click(object sender, EventArgs e)
         {
-
+            foreach (ProcessInfo processInfo in ProcessList)
+            {
+                processInfo.Run();
+            }
         }
     }
 }
