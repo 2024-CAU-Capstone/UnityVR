@@ -186,7 +186,13 @@ namespace WindowsFormsApp
 
         private void ReceiveMail_Click(object sender, EventArgs e)
         {
-            mailHandler.GetEmails();
+            if (mailHandler.isConnectionInProgress)
+            {
+                MailNotLoaded mailNotLoaded = new MailNotLoaded();
+                mailNotLoaded.Show();
+            }
+            else
+                mailHandler.GetEmails();
         }
 
 

@@ -13,7 +13,8 @@ namespace WindowsFormsApp
     public partial class SendMailPopup : Form
     {
         private MailHandler mailHandler;
-        public SendMailPopup(MailHandler mailHandler)
+        private FilePathTracker filePathTracker;
+        public SendMailPopup(MailHandler mailHandler, FilePathTracker filePathTracker)
         {
             InitializeComponent();
             this.mailHandler = mailHandler;
@@ -21,6 +22,8 @@ namespace WindowsFormsApp
             {
                 MailSelectionBox.Items.Add(mailHandler.GetReceiverEmailList()[i]);
             }
+
+            this.filePathTracker = filePathTracker;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -42,6 +45,12 @@ namespace WindowsFormsApp
 
         private void SendMail_click(object sender, EventArgs e)
         {
+            if (this.mailHandler.isConnectionInProgress)
+            {
+                MailNotLoaded mailNotLoaded = new MailNotLoaded();
+                mailNotLoaded.Show();
+                return;
+            }
             List<string> result = new List<string>();
             if (MailSelectionBox.Items.Count > 0)
             {
@@ -50,7 +59,7 @@ namespace WindowsFormsApp
                     result.Add(MailSelectionBox.CheckedItems[i].ToString());
                 }
             }
-            this.mailHandler.SendMail(result);
+            this.mailHandler.SendMail(result, filePathTracker);
             Close();
         }
     }

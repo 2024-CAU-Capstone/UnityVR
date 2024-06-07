@@ -112,16 +112,18 @@
 
         private void EmailInsert_Click(object sender, EventArgs e)
         {
-            handler.ConnectMail(EmailBox.Text, PasswordBox.Text);
-   //         if (result)
-     //       {
-       //         Close();
-         //   }
-  //          else
-    //        {
-      //          EmailBox.ResetText();
-        //        PasswordBox.ResetText();
-          //  }
+            handler.ConnectMail(EmailBox.Text, PasswordBox.Text, false, this);
+        }
+
+        public void EmailInsertResult(bool isCorrect)
+        {
+            if (isCorrect)
+                Close();
+            else
+            {
+                EmailBox.ResetText();
+                PasswordBox.ResetText();
+            }
         }
 
         #endregion

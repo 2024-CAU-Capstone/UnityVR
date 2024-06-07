@@ -17,15 +17,17 @@ namespace WindowsFormsApp
 {
     public class MailHandler
     {
+        public bool isConnectionInProgress = true;
+
         private string idValue;
         private string passwordValue;
         static readonly string mailTextFile = @"./mail.txt";
         private DateTime lastUpdatedDate;
         private SmtpClient smtpClient = new SmtpClient();
         private ImapClient imapClient = new ImapClient();
-        private bool isSmtpEnabled = false;
-        public bool isConnectionInProgress = true;
-        
+        private bool isConnectedToServer = false;
+        private ZipHelper zipHelper = new ZipHelper();
+
         private List<string> receiverEmailList = new List<string>();
 
         public MailHandler() {
@@ -71,32 +73,41 @@ namespace WindowsFormsApp
             return false;
         }
 
-        public async void ConnectMail(string setId, string setPw)
+        public async void ConnectMail(string setId, string setPw, 
+            bool isInitial=true, MailLogin mailLogin=null)
         {
             if (!setId.Contains("@outlook.com"))
             {
                 isConnectionInProgress = false;
                 return;
             }
-            if (idValue.Contains("@outlook.com"))
+            try
             {
-                try
+                isConnectedToServer = false;
+                isConnectionInProgress = true;
+                smtpClient = new SmtpClient();
+                imapClient = new ImapClient();
+                await smtpClient.ConnectAsync("smtp-mail.outlook.com", 587,
+                        MailKit.Security.SecureSocketOptions.StartTls);
+                await smtpClient.AuthenticateAsync(setId, setPw);
+                await imapClient.ConnectAsync("outlook.office365.com", 993, true);
+                await imapClient.AuthenticateAsync(setId, setPw);
+                isConnectionInProgress = false;
+                isConnectedToServer = true;
+                if (!isInitial)
                 {
-                    isConnectionInProgress = true;
-                    smtpClient = new SmtpClient();
-                    imapClient = new ImapClient();
-                    await smtpClient.ConnectAsync("smtp-mail.outlook.com", 587,
-                            MailKit.Security.SecureSocketOptions.StartTls);
-                    await smtpClient.AuthenticateAsync(setId, setPw);
-                    await imapClient.ConnectAsync("outlook.office365.com", 993, true);
-                    await imapClient.AuthenticateAsync(setId, setPw);
-                    isConnectionInProgress = false;
-                    isSmtpEnabled = false;
+                    mailLogin.EmailInsertResult(true);
                 }
-                catch (MailKit.Security.AuthenticationException ex) { throw; }
+                IdPasswordUpdate(setId, setPw);
             }
-            IdPasswordUpdate(setId, setPw);
-            if (receiverEmailList.Count == 0) AddReceiverEmail(setId);
+            catch (MailKit.Security.AuthenticationException ex)
+            {
+                if (!isInitial)
+                {
+                    mailLogin.EmailInsertResult(false);
+                }
+            }
+            if (!receiverEmailList.Contains(setId)) AddReceiverEmail(setId);
         }
 
         private void IdPasswordUpdate(string setId, string setPwd)
@@ -136,7 +147,7 @@ namespace WindowsFormsApp
             }
         }
 
-        public async void SendMail(List<string> mailsToSend)
+        public async void SendMail(List<string> mailsToSend, FilePathTracker filePathTracker)
         {
             try
             {
@@ -157,8 +168,8 @@ namespace WindowsFormsApp
             {
                 message.To.Add(new MailboxAddress("Windows_Scheduler", mailsToSend[i]));
             }
+            await Task.Run(() => this.zipHelper.CreateFromDirectory(filePathTracker.BuildPath()));
             await smtpClient.SendAsync(message);
-            isSmtpEnabled = true;
             return;
         }
 
