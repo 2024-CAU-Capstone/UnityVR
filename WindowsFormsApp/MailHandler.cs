@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
@@ -23,6 +24,7 @@ namespace WindowsFormsApp
         private SmtpClient smtpClient = new SmtpClient();
         private ImapClient imapClient = new ImapClient();
         private bool isSmtpEnabled = false;
+        public bool isConnectionInProgress = true;
         
         private List<string> receiverEmailList = new List<string>();
 
@@ -69,34 +71,34 @@ namespace WindowsFormsApp
             return false;
         }
 
-        public bool ConnectMail(string setId, string setPw)
+        public async void ConnectMail(string setId, string setPw)
         {
-            if (!setId.Contains("@naver.com")) return false;
-            if (idValue.Contains("@naver.com"))
+            if (!setId.Contains("@outlook.com"))
+            {
+                isConnectionInProgress = false;
+                return;
+            }
+            if (idValue.Contains("@outlook.com"))
             {
                 try
                 {
-                    smtpClient.Disconnect(true);
-                    imapClient.Disconnect(true);
-                    Thread.Sleep(1000);
+                    isConnectionInProgress = true;
                     smtpClient = new SmtpClient();
                     imapClient = new ImapClient();
-                    smtpClient.ConnectAsync("smtp.naver.com", 465,
-                            MailKit.Security.SecureSocketOptions.SslOnConnect);
-                    smtpClient.AuthenticateAsync(setId.Split("@")[0], setPw);
-                    imapClient.ConnectAsync("imap.naver.com", 993, true);
-                    imapClient.AuthenticateAsync(setId.Split("@")[0], setPw);
+                    await smtpClient.ConnectAsync("smtp-mail.outlook.com", 587,
+                            MailKit.Security.SecureSocketOptions.StartTls);
+                    await smtpClient.AuthenticateAsync(setId, setPw);
+                    await imapClient.ConnectAsync("outlook.office365.com", 993, true);
+                    await imapClient.AuthenticateAsync(setId, setPw);
+                    isConnectionInProgress = false;
                     isSmtpEnabled = false;
-
                 }
-                catch (MailKit.Security.AuthenticationException ex) { throw; return false; }
+                catch (MailKit.Security.AuthenticationException ex) { throw; }
             }
             IdPasswordUpdate(setId, setPw);
             if (receiverEmailList.Count == 0) AddReceiverEmail(setId);
-
-            return true;
-            
         }
+
         private void IdPasswordUpdate(string setId, string setPwd)
         {
             string[] arrLine = File.ReadAllLines(mailTextFile);
@@ -124,34 +126,22 @@ namespace WindowsFormsApp
 
         public void GetEmails()
         {
-            return;
-            try
+            imapClient.Inbox.Open(MailKit.FolderAccess.ReadOnly);
+            var query = MailKit.Search.SearchQuery.DeliveredAfter(lastUpdatedDate)
+                .And(MailKit.Search.SearchQuery.SubjectContains("Azure"));
+            var uids = imapClient.Inbox.Search(query);
+            foreach ( var u in uids )
             {
-                if (!isSmtpEnabled)
-                    smtpClient.AuthenticateAsync(this.idValue, this.passwordValue);
+                var get_temp = imapClient.Inbox.GetMessage(u);
             }
-            catch(MailKit.Security.AuthenticationException ex)
-            {
-                MailLogin mailLogin = new MailLogin(this);
-                mailLogin.Show();
-                return;
-            }
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Windows_Scheduler", this.idValue));
-            message.To.Add(new MailboxAddress("Windows_Scheduler", this.idValue));
-            message.Subject = DateTime.Now.ToString();
-            message.Body = new MimeKit.TextPart("text");
-            smtpClient.SendAsync(message);
-            isSmtpEnabled = true;
-            return;
         }
 
-        public void SendMail(List<string> mailsToSend)
+        public async void SendMail(List<string> mailsToSend)
         {
             try
             {
-                if (!isSmtpEnabled)
-                    smtpClient.AuthenticateAsync(this.idValue, this.passwordValue);
+               // if (!isSmtpEnabled)
+                 //   smtpClient.AuthenticateAsync(this.idValue, this.passwordValue);
             }
             catch (MailKit.Security.AuthenticationException ex)
             {
@@ -167,7 +157,7 @@ namespace WindowsFormsApp
             {
                 message.To.Add(new MailboxAddress("Windows_Scheduler", mailsToSend[i]));
             }
-            smtpClient.SendAsync(message);
+            await smtpClient.SendAsync(message);
             isSmtpEnabled = true;
             return;
         }
