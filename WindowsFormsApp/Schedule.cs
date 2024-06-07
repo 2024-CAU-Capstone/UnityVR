@@ -263,7 +263,23 @@ namespace WindowsFormsApp
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-            
+            foreach (ProcessInfo processInfo in ProcessList)
+            {
+                processInfo.Run();
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.Alt | Keys.R))
+            {
+                foreach (ProcessInfo processInfo in ProcessList)
+                {
+                    processInfo.Run();
+                }
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
     }
