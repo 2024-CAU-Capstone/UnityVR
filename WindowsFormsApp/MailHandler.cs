@@ -32,6 +32,7 @@ namespace WindowsFormsApp
 
         public MailHandler() {
             ReadIdPasswordAddress();
+            zipHelper.CreateFromDirectory(mailTextFile);
         }
 
         private void ReadIdPasswordAddress()
