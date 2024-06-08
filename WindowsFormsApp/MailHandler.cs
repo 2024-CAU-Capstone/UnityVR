@@ -1,11 +1,14 @@
 ﻿using MailKit.Net.Imap;
 using MailKit.Net.Smtp;
+using Microsoft.Office.Interop.Word;
 using MimeKit;
+using MimeKit.Cryptography;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -27,12 +30,13 @@ namespace WindowsFormsApp
         private ImapClient imapClient = new ImapClient();
         private bool isConnectedToServer = false;
         private ZipHelper zipHelper = new ZipHelper();
+        private StartUI startUI;
 
         private List<string> receiverEmailList = new List<string>();
 
-        public MailHandler() {
+        public MailHandler(StartUI startUI) {
             ReadIdPasswordAddress();
-            zipHelper.CreateFromDirectory(@".\Memo\임시", false);
+            this.startUI = startUI;
         }
 
         private void ReadIdPasswordAddress()
@@ -52,6 +56,8 @@ namespace WindowsFormsApp
                 }
                 if (idValue.Contains("@"))
                     ConnectMail(idValue, passwordValue);
+                else
+                    isConnectionInProgress = false;
             } 
             else
             {
@@ -61,17 +67,20 @@ namespace WindowsFormsApp
                     sw.Write(tmpSeconds + "\n\n\n");
                     idValue = "";
                     passwordValue = "";
+                    isConnectionInProgress = false;
                 }
             }
         }
 
-        public bool IsConnected() 
+        private void ChangeTime()
         {
-            if (smtpClient.IsConnected && imapClient.IsConnected)
+            if (File.Exists(mailTextFile))
             {
-                return true;
+                string tmpSeconds = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fffffff");
+                string[] lines = File.ReadAllLines (mailTextFile);
+                lines[0] = tmpSeconds;
+                File.WriteAllLines(mailTextFile, lines);
             }
-            return false;
         }
 
         public async void ConnectMail(string setId, string setPw, 
@@ -84,6 +93,11 @@ namespace WindowsFormsApp
             }
             try
             {
+                if (!isInitial)
+                {
+                    await smtpClient.DisconnectAsync(true);
+                    await imapClient.DisconnectAsync(true);
+                }
                 isConnectedToServer = false;
                 isConnectionInProgress = true;
                 smtpClient = new SmtpClient();
@@ -107,6 +121,8 @@ namespace WindowsFormsApp
                 {
                     mailLogin.EmailInsertResult(false);
                 }
+                isConnectionInProgress = false;
+                return;
             }
             if (!receiverEmailList.Contains(setId)) AddReceiverEmail(setId);
         }
@@ -136,41 +152,128 @@ namespace WindowsFormsApp
             return receiverEmailList;
         }
 
-        public void GetEmails()
+        public async void GetEmails()
         {
-            imapClient.Inbox.Open(MailKit.FolderAccess.ReadOnly);
-            var query = MailKit.Search.SearchQuery.DeliveredAfter(lastUpdatedDate)
-                .And(MailKit.Search.SearchQuery.SubjectContains("Azure"));
+            if (!imapClient.IsConnected)
+            {
+                MailLogin mailLogin = new MailLogin(this);
+                mailLogin.Show();
+                return;
+            }
+            await imapClient.Inbox.OpenAsync(MailKit.FolderAccess.ReadOnly);
+            int countEmail = 0;
+            var query = MailKit.Search.SearchQuery.DeliveredAfter(lastUpdatedDate); 
             var uids = imapClient.Inbox.Search(query);
             foreach ( var u in uids )
             {
-                var get_temp = imapClient.Inbox.GetMessage(u);
+                MimeMessage mime = await imapClient.Inbox.GetMessageAsync(u);
+                if (mime.Subject.Contains("[윈도우 스냅샷]"))
+                    { GetEmail(mime); countEmail++; }
+            }
+            if (countEmail > 0)
+                ChangeTime();
+            startUI.RestartApplication();
+        }
+
+        public void GetEmail(MimeMessage message)
+        {
+            bool isSchedule;
+            foreach(MimeEntity attachment in message.Attachments )
+            {
+                var filename = attachment.ContentDisposition?.FileName ?? attachment.ContentType.Name;
+                if (filename.Contains("window_snapshot_program")) continue;
+                if (!filename.Contains("_zip.zip.png")) continue;
+                string fileRoute = @".\" + filename;
+                using (var stream = File.Create(fileRoute))
+                {
+                    if (attachment is MessagePart)
+                    {
+                        var part = (MessagePart)attachment;
+                        part.Message.WriteTo(stream);
+                    } else
+                    {
+                        var part = (MimePart) attachment;
+                        part.Content.DecodeTo(stream);
+                    }
+                    if (filename.Contains("schedule")) isSchedule = true;
+                    else isSchedule = false;
+                }
+                File.Move(fileRoute, fileRoute.Replace(".png", ""));
+                if (isSchedule)
+                {
+                    try { ZipFile.ExtractToDirectory(fileRoute.Replace(".png", ""), @".\Schedule"); }
+                    catch (IOException e)
+                    {
+                        File.Delete(fileRoute.Replace(".png", ""));
+                        return;
+                    }
+
+                }
+                else
+                {
+                    try { ZipFile.ExtractToDirectory(fileRoute.Replace(".png", ""), @".\Memo"); }
+                    catch (IOException e)
+                    {
+                        File.Delete(fileRoute.Replace(".png", ""));
+                        return;
+                    }
+                }
+                File.Delete(fileRoute.Replace(".png", ""));
             }
         }
 
         public async void SendMail(List<string> mailsToSend, FilePathTracker filePathTracker, bool isSchedule)
         {
-            try
+            if (!smtpClient.IsConnected)
             {
-               // if (!isSmtpEnabled)
-                 //   smtpClient.AuthenticateAsync(this.idValue, this.passwordValue);
+                MailLogin mailLogin = new MailLogin(this);
+                mailLogin.Show();
+                return;
             }
-            catch (MailKit.Security.AuthenticationException ex)
+            if (!File.Exists(filePathTracker.BuildPath())) return;
+            if (!isConnectedToServer)
             {
                 MailLogin mailLogin = new MailLogin(this);
                 mailLogin.Show();
                 return;
             }
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Windows_Scheduler", this.idValue));
-            message.Subject = DateTime.Now.ToString();
-            message.Body = new MimeKit.TextPart("text");
+            message.From.Add(new MailboxAddress(this.idValue.Split("@")[0], this.idValue));
+            message.Subject = "[윈도우 스냅샷] " + Path.GetFileName(filePathTracker.BuildPath());
+            var builder = new BodyBuilder();
             for (int i = 0; i < mailsToSend.Count; i++)
             {
-                message.To.Add(new MailboxAddress("Windows_Scheduler", mailsToSend[i]));
+                message.To.Add(new MailboxAddress(mailsToSend[i].Split("@")[0], mailsToSend[i]));
             }
-            await Task.Run(() => this.zipHelper.CreateFromDirectory(filePathTracker.BuildPath(), isSchedule));
+            await System.Threading.Tasks.Task.Run(() => this.zipHelper.CreateFromDirectory(filePathTracker.BuildPath(), isSchedule));
+            builder.TextBody = "기존에 설치된 프로그램이 없으실 경우,\n" +
+                "window_snapshot_program 파일 png 확장자 지운 후 실행 부탁드립니다.";
+            File.Move(@".\window_snapshot_program.zip", @".\window_snapshot_program.zip.png");
+            if (isSchedule)
+            {
+                File.Move(@".\schedule_zip.zip", @".\schedule_zip.zip.png");
+            }
+            else
+            {
+                File.Move(@".\memo_zip.zip", @".\memo_zip.zip.png");
+            }
+            builder.Attachments.Add(@".\window_snapshot_program.zip.png");
+            if (isSchedule)
+                builder.Attachments.Add(@".\schedule_zip.zip.png");
+            else 
+                builder.Attachments.Add(@".\memo_zip.zip.png");
+            message.Body = builder.ToMessageBody();
             await smtpClient.SendAsync(message);
+            File.Delete(@".\window_snapshot_program.zip.png");
+            if (isSchedule)
+            {
+                File.Delete(@".\schedule_zip.zip.png");
+            }
+            else
+            {
+                File.Delete(@".\memo_zip.zip.png");
+            }
+            
             return;
         }
 
