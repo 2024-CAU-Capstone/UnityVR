@@ -14,7 +14,8 @@ namespace WindowsFormsApp
     {
         private MailHandler mailHandler;
         private FilePathTracker filePathTracker;
-        public SendMailPopup(MailHandler mailHandler, FilePathTracker filePathTracker)
+        private bool isSchedule;
+        public SendMailPopup(MailHandler mailHandler, FilePathTracker filePathTracker, bool isSchedule)
         {
             InitializeComponent();
             this.mailHandler = mailHandler;
@@ -24,6 +25,7 @@ namespace WindowsFormsApp
             }
 
             this.filePathTracker = filePathTracker;
+            this.isSchedule = isSchedule;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -59,7 +61,7 @@ namespace WindowsFormsApp
                     result.Add(MailSelectionBox.CheckedItems[i].ToString());
                 }
             }
-            this.mailHandler.SendMail(result, filePathTracker);
+            this.mailHandler.SendMail(result, filePathTracker, isSchedule);
             Close();
         }
     }

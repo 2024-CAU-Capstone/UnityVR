@@ -32,7 +32,7 @@ namespace WindowsFormsApp
 
         public MailHandler() {
             ReadIdPasswordAddress();
-            zipHelper.CreateFromDirectory(mailTextFile);
+            zipHelper.CreateFromDirectory(@".\Memo\임시", false);
         }
 
         private void ReadIdPasswordAddress()
@@ -148,7 +148,7 @@ namespace WindowsFormsApp
             }
         }
 
-        public async void SendMail(List<string> mailsToSend, FilePathTracker filePathTracker)
+        public async void SendMail(List<string> mailsToSend, FilePathTracker filePathTracker, bool isSchedule)
         {
             try
             {
@@ -169,7 +169,7 @@ namespace WindowsFormsApp
             {
                 message.To.Add(new MailboxAddress("Windows_Scheduler", mailsToSend[i]));
             }
-            await Task.Run(() => this.zipHelper.CreateFromDirectory(filePathTracker.BuildPath()));
+            await Task.Run(() => this.zipHelper.CreateFromDirectory(filePathTracker.BuildPath(), isSchedule));
             await smtpClient.SendAsync(message);
             return;
         }
