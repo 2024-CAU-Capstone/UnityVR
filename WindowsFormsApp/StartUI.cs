@@ -23,7 +23,7 @@ namespace WindowsFormsApp
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F12);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F11);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_SHIFT, (uint)Keys.B);
-            mailHandler = new MailHandler();
+            mailHandler = new MailHandler(this);
         }
         #region public method
         public void AddMemo(Memo memo) => MemoList.Add(memo);
@@ -186,7 +186,13 @@ namespace WindowsFormsApp
 
         private void ReceiveMail_Click(object sender, EventArgs e)
         {
-            mailHandler.GetEmails();
+            if (mailHandler.isConnectionInProgress)
+            {
+                MailNotLoaded mailNotLoaded = new MailNotLoaded();
+                mailNotLoaded.Show();
+            }
+            else
+                mailHandler.GetEmails();
         }
 
 
@@ -226,6 +232,11 @@ namespace WindowsFormsApp
         {
             MailLogin mailLogin = new MailLogin(this.mailHandler);
             mailLogin.Show();
+        }
+
+        public void RestartApplication()
+        {
+            Application.Restart();
         }
     }
 }

@@ -112,11 +112,13 @@
 
         private void EmailInsert_Click(object sender, EventArgs e)
         {
-            bool result = handler.ConnectMail(EmailBox.Text, PasswordBox.Text);
-            if (result)
-            {
+            handler.ConnectMail(EmailBox.Text, PasswordBox.Text, false, this);
+        }
+
+        public void EmailInsertResult(bool isCorrect)
+        {
+            if (isCorrect)
                 Close();
-            }
             else
             {
                 EmailBox.ResetText();

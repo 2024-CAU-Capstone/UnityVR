@@ -208,7 +208,7 @@ namespace WindowsFormsApp
 
         private void SendMailButton_Click(object sender, EventArgs e)
         {
-            SendMailPopup sendMailPopup = new SendMailPopup(this.startUI.mailHandler);
+            SendMailPopup sendMailPopup = new SendMailPopup(this.startUI.mailHandler, this, false);
             sendMailPopup.Show();
         }
 
