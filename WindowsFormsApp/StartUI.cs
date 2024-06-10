@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.IO;
 using Windows.Win32;
 using Windows.Win32.Foundation;
 using Windows.Win32.UI.Input.KeyboardAndMouse;
@@ -39,12 +40,25 @@ namespace WindowsFormsApp
 
         private void InitStartUI()
         {
+            CreateScheduleMemoDirectory();
             MemoList = new List<Memo>();
             ScheduleList = new List<Schedule>();
             date = DateTime.Now;
             ObjectSerialization objs = new ObjectSerialization(MemoList, ScheduleList);
             objs.LoadData(this);
             LoadMemoAndSchedule(date);
+        }
+
+        private void CreateScheduleMemoDirectory()
+        {
+            if (!Directory.Exists(@".\Schedule"))
+            {
+                Directory.CreateDirectory(@".\Schedule");
+            }
+            if (!Directory.Exists(@".\Memo"))
+            {
+                Directory.CreateDirectory(@".\Memo");
+            }
         }
 
         private void MakeMomoUI()
