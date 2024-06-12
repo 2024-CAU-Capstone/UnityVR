@@ -77,10 +77,12 @@ namespace WindowsFormsApp
                 if (IsSchedule)
                 {
                     schedule.AddProcess(doc);
+                    schedule.AddFile(document);
                 }
                 else
                 {
                     memo.AddProcess(doc);
+                    memo.AddFile(document);
                 }
             }
             Close();

@@ -34,6 +34,7 @@ namespace WindowsFormsApp
         private List<string> ScreenShotSerial;
 
         private DateTime ScheduleTime;
+        private List<string> Files;
         /////////////////////////////
         //unSaved
         private CheckBox[] screenCheckBox;
@@ -49,7 +50,10 @@ namespace WindowsFormsApp
         {
             return @".\Schedule\" + detail;
         }
-
+        public List<string> GetFiles()
+        {
+            return Files;
+        }
         private void InitSchedule()
         {
             ScreenShotList = new List<Image>();
@@ -63,6 +67,7 @@ namespace WindowsFormsApp
             ScheduleTime = startUI.GetDate();
             MakeCheckBox();
             IsMake = true;
+            Files = new List<string>();
         }
         #region public method
         public void InitSchedule(Schedule saveSchedule)
@@ -96,6 +101,10 @@ namespace WindowsFormsApp
         public void SetLinkList(List<string> linkList) => LinkList = linkList;
         public void SetProgramList(List<string> programList) => ProgramList = programList;
         public void SetProcessList(List<ProcessInfo> processList) => ProcessList = processList;
+        public void AddFile(string path)
+        {
+            Files.Add(path);
+        }
         public void SetScreenShotList(List<string> screenShotList)
         {
             ScreenShotList = new List<Image>();
@@ -230,6 +239,7 @@ namespace WindowsFormsApp
             {
                 file = openFileDialog.SafeFileName;
                 fileFullPath = openFileDialog.FileName;
+                Files.Add(fileFullPath);
                 fileName.Text = file;
             }
         }

@@ -9,5 +9,6 @@ namespace WindowsFormsApp
     public interface FilePathTracker
     {
         string BuildPath();
+        List<string> GetFiles();
     }
 }
