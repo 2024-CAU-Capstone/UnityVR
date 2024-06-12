@@ -31,6 +31,7 @@ namespace WindowsFormsApp
         private List<Image> ScreenShotList;
         private DateTime MemoTime;
         private List<string> ScreenShotSerial;
+        private List<string> Files;
         /////////////////////////////
         //unSaved
         private CheckBox[] screenCheckBox;
@@ -55,6 +56,7 @@ namespace WindowsFormsApp
             MakeCheckBox();
             IsMake = true;
             ScreenShotSerial = new List<string>();
+            Files = new List<string>();
         }
         public void InitMemo(Memo savedmemo)
         {
@@ -88,6 +90,10 @@ namespace WindowsFormsApp
         public void SetLinkList(List<string> linkList) => LinkList = linkList;
         public void SetProgramList(List<string> programList) => ProgramList = programList;
         public void SetProcessList(List<ProcessInfo> processList) => ProcessList = processList;
+        public void AddFile(string path)
+        {
+            Files.Add(path);
+        }
         public void SetScreenShotList(List<string> screenShotList)
         {
             ScreenShotList = new List<Image>();
@@ -196,6 +202,7 @@ namespace WindowsFormsApp
             {
                 file = openFileDialog.SafeFileName;
                 fileFullPath = openFileDialog.FileName;
+                Files.Add(fileFullPath);
                 fileName.Text = file;
             }
         }
@@ -215,6 +222,10 @@ namespace WindowsFormsApp
         public string BuildPath()
         {
             return @".\Memo\" + detail;
+        }
+        public List<string> GetFiles()
+        {
+            return Files;
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {

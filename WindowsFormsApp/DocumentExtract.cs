@@ -15,12 +15,19 @@ namespace WindowsFormsApp
         public static List<string> OpenDocuments()
         {
             List<string> result = new List<string>();
-            Word.Application word = (Word.Application)Marshal2.GetActiveObject("Word.Application");
-            foreach (Word.Document doc in word.Documents)
+            try
             {
-                result.Add(doc.FullName);
+                Word.Application word = (Word.Application)Marshal2.GetActiveObject("Word.Application");
+                foreach (Word.Document doc in word.Documents)
+                {
+                    result.Add(doc.FullName);
+                }
+                return result;
             }
-            return result;
+            catch (Exception ex)
+            {
+                return result;
+            }
         }
         public static class Marshal2
         {
