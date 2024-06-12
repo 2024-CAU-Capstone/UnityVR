@@ -201,20 +201,38 @@ namespace WindowsFormsApp
                 File.Move(fileRoute, fileRoute.Replace(".png", ""));
                 if (isSchedule)
                 {
-                    try { ZipFile.ExtractToDirectory(fileRoute.Replace(".png", ""), @".\Schedule"); }
+                    try { 
+                        ZipFile.ExtractToDirectory(fileRoute.Replace(".png", ""), @".\Schedule");
+                        string[] strings = Directory.GetFiles(@".\Schedule\SaveFiles");
+                        foreach (string s in strings)
+                        {
+                            File.Copy(s, Path.Combine(@".\SaveFiles", Path.GetFileName(s)), true);
+                        }
+                        Directory.Delete(@".\Schedule\SaveFiles");
+                    }
                     catch (IOException e)
                     {
                         File.Delete(fileRoute.Replace(".png", ""));
+                        if (File.Exists(@".\Schedule\SaveFiles")) File.Delete(@".\Schedule\SaveFiles");
                         return;
                     }
 
                 }
                 else
                 {
-                    try { ZipFile.ExtractToDirectory(fileRoute.Replace(".png", ""), @".\Memo"); }
+                    try { 
+                        ZipFile.ExtractToDirectory(fileRoute.Replace(".png", ""), @".\Memo");
+                        string[] strings = Directory.GetFiles(@".\Memo\SaveFiles");
+                        foreach (string s in strings)
+                        {
+                            File.Copy(s, Path.Combine(@".\SaveFiles", Path.GetFileName(s)), true);
+                        }
+                        Directory.Delete(@".\Memo\SaveFiles");
+                    }
                     catch (IOException e)
                     {
                         File.Delete(fileRoute.Replace(".png", ""));
+                        if (File.Exists(@".\Memo\SaveFiles")) File.Delete(@".\Memo\SaveFiles");
                         return;
                     }
                 }
@@ -245,7 +263,8 @@ namespace WindowsFormsApp
             {
                 message.To.Add(new MailboxAddress(mailsToSend[i].Split("@")[0], mailsToSend[i]));
             }
-            await System.Threading.Tasks.Task.Run(() => this.zipHelper.CreateFromDirectory(filePathTracker.BuildPath(), isSchedule));
+            await System.Threading.Tasks.Task.Run(() => this.zipHelper.CreateFromDirectory(filePathTracker.BuildPath(), 
+                isSchedule, filePathTracker));
             builder.TextBody = "기존에 설치된 프로그램이 없으실 경우,\n" +
                 "window_snapshot_program 파일 png 확장자 지운 후 실행 부탁드립니다.";
             File.Move(@".\window_snapshot_program.zip", @".\window_snapshot_program.zip.png");

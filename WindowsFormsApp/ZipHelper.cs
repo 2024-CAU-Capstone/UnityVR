@@ -13,10 +13,11 @@ namespace WindowsFormsApp
         private string programRoute = @".\window_snapshot_program";
         private string individualRoute = @".\";
         private string currentRoute = @".\";
-        public void CreateFromDirectory(string directoryName, bool isSchedule)
+        public void CreateFromDirectory(string directoryName, bool isSchedule, FilePathTracker fp)
         {
 
             Directory.CreateDirectory(programRoute);
+            Directory.CreateDirectory(Path.Combine(programRoute, "SaveFiles"));
             if (isSchedule)
             {
                 individualRoute = Path.Combine(individualRoute, "schedule_zip");
@@ -24,6 +25,7 @@ namespace WindowsFormsApp
                 Directory.CreateDirectory(Path.Combine(programRoute, "Schedule"));
                 File.Copy(directoryName,
                     Path.Combine(Path.Combine(programRoute, "Schedule"), Path.GetFileName(directoryName)), true);
+                
             }
             else
             {
@@ -32,6 +34,14 @@ namespace WindowsFormsApp
                 Directory.CreateDirectory(Path.Combine(programRoute, "Memo"));
                 File.Copy(directoryName, 
                     Path.Combine(Path.Combine(programRoute, "Memo"), Path.GetFileName(directoryName)), true);
+            }
+            Directory.CreateDirectory(Path.Combine(individualRoute, "SaveFiles"));
+            for (int i = 0; i < fp.GetFiles().Count; i++)
+            {
+                File.Copy(fp.GetFiles()[i],
+                    Path.Combine(Path.Combine(programRoute, "SaveFiles"), Path.GetFileName(fp.GetFiles()[i])), true);
+                File.Copy(fp.GetFiles()[i],
+                    Path.Combine(Path.Combine(individualRoute, "SaveFiles"), Path.GetFileName(fp.GetFiles()[i])), true);
             }
             File.Copy(directoryName, Path.Combine(individualRoute, Path.GetFileName(directoryName)), true);
             CopyDirectory(Directory.GetParent(Directory.GetParent(directoryName).FullName).FullName, programRoute);
