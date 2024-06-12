@@ -59,6 +59,10 @@ namespace WindowsFormsApp
             {
                 Directory.CreateDirectory(@".\Memo");
             }
+            if (!Directory.Exists(@".\SaveFiles"));
+            {
+                Directory.CreateDirectory(@".\SaveFiles");
+            }
         }
 
         private void MakeMomoUI()
