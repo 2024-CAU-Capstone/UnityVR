@@ -21,7 +21,7 @@ namespace WindowsFormsApp
             InitStartUI();
             hook = new KeyboardHook();
             hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
-            hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.M);
+            hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.H);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.N);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_SHIFT, (uint)Keys.B);
             mailHandler = new MailHandler(this);
