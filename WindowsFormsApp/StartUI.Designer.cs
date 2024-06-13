@@ -46,7 +46,7 @@ namespace WindowsFormsApp
             YesterdayButton.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             YesterdayButton.BackgroundImage = Properties.Resources.LeftArrow;
             YesterdayButton.BackgroundImageLayout = ImageLayout.Stretch;
-            YesterdayButton.Location = new Point(12, 17);
+            YesterdayButton.Location = new Point(12, 18);
             YesterdayButton.Margin = new Padding(3, 4, 3, 4);
             YesterdayButton.Name = "YesterdayButton";
             YesterdayButton.Size = new Size(34, 24);
@@ -93,7 +93,7 @@ namespace WindowsFormsApp
             // 
             label1.AutoSize = true;
             label1.Font = new Font("맑은 고딕", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            label1.Location = new Point(369, 93);
+            label1.Location = new Point(369, 92);
             label1.Name = "label1";
             label1.Size = new Size(133, 25);
             label1.TabIndex = 6;
@@ -103,7 +103,7 @@ namespace WindowsFormsApp
             // 
             label2.AutoSize = true;
             label2.Font = new Font("맑은 고딕", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            label2.Location = new Point(12, 93);
+            label2.Location = new Point(12, 92);
             label2.Name = "label2";
             label2.Size = new Size(50, 25);
             label2.TabIndex = 7;
@@ -156,7 +156,7 @@ namespace WindowsFormsApp
             Controls.Add(YesterdayButton);
             Margin = new Padding(3, 4, 3, 4);
             Name = "StartUI";
-            Text = "Memo";
+            Text = "업무 상태를 기억하는 비서";
             FormClosing += ExitProgram;
             Load += StartUI_Load;
             ResumeLayout(false);

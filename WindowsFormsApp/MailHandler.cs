@@ -208,12 +208,12 @@ namespace WindowsFormsApp
                         {
                             File.Copy(s, Path.Combine(@".\SaveFiles", Path.GetFileName(s)), true);
                         }
-                        Directory.Delete(@".\Schedule\SaveFiles");
+                        DeleteDirectory(@".\Schedule\SaveFiles");
                     }
                     catch (IOException e)
                     {
                         File.Delete(fileRoute.Replace(".png", ""));
-                        if (File.Exists(@".\Schedule\SaveFiles")) File.Delete(@".\Schedule\SaveFiles");
+                        if (Directory.Exists(@".\Schedule\SaveFiles")) DeleteDirectory(@".\Schedule\SaveFiles");
                         return;
                     }
 
@@ -227,17 +227,36 @@ namespace WindowsFormsApp
                         {
                             File.Copy(s, Path.Combine(@".\SaveFiles", Path.GetFileName(s)), true);
                         }
-                        Directory.Delete(@".\Memo\SaveFiles");
+                        DeleteDirectory(@".\Memo\SaveFiles");
                     }
                     catch (IOException e)
                     {
                         File.Delete(fileRoute.Replace(".png", ""));
-                        if (File.Exists(@".\Memo\SaveFiles")) File.Delete(@".\Memo\SaveFiles");
+                        if (Directory.Exists(@".\Memo\SaveFiles")) DeleteDirectory(@".\Memo\SaveFiles");
                         return;
                     }
                 }
                 File.Delete(fileRoute.Replace(".png", ""));
             }
+        }
+
+        public static void DeleteDirectory(string target_dir)
+        {
+            string[] files = Directory.GetFiles(target_dir);
+            string[] dirs = Directory.GetDirectories(target_dir);
+
+            foreach (string file in files)
+            {
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
+            }
+
+            foreach (string dir in dirs)
+            {
+                DeleteDirectory(dir);
+            }
+
+            Directory.Delete(target_dir, false);
         }
 
         public async void SendMail(List<string> mailsToSend, FilePathTracker filePathTracker, bool isSchedule)
