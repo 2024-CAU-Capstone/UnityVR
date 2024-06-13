@@ -218,7 +218,7 @@ namespace WindowsFormsApp
         #region Keyboard Shortcut Definition
         void hook_KeyPressed(object sender, KeyPressedEventArgs e)
         {
-            if (e.Key == (uint)Keys.M)
+            if (e.Key == (uint)Keys.H)
             {
                 Memo memo = new Memo(this);
                 memo.Show();
