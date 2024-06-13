@@ -80,6 +80,9 @@ namespace WindowsFormsApp
             alarmTime = saveSchedule.alarmTime;
             time = saveSchedule.time;
             IsMake = false;
+            Files = saveSchedule.Files;
+            ProgramList = saveSchedule.ProgramList;
+            ProcessList = saveSchedule.ProcessList;
             /////////////////////////////
             MakeCheckBox();
             ShowLink();
@@ -101,6 +104,8 @@ namespace WindowsFormsApp
         public void SetLinkList(List<string> linkList) => LinkList = linkList;
         public void SetProgramList(List<string> programList) => ProgramList = programList;
         public void SetProcessList(List<ProcessInfo> processList) => ProcessList = processList;
+        public void SetFiles(List<string> files) => Files = files;
+
         public void AddFile(string path)
         {
             Files.Add(path);
@@ -240,6 +245,8 @@ namespace WindowsFormsApp
                 file = openFileDialog.SafeFileName;
                 fileFullPath = openFileDialog.FileName;
                 Files.Add(fileFullPath);
+                ProcessInfo doc = new ProcessInfo("file", fileFullPath);
+                AddProcess(doc);
                 fileName.Text = file;
             }
         }

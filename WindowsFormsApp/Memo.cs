@@ -68,8 +68,10 @@ namespace WindowsFormsApp
             MemoTime = savedmemo.MemoTime;
             IsMake = false;
             ProcessList = savedmemo.ProcessList;
+            ProgramList = savedmemo.ProgramList;
             appName.Text = savedmemo.appName.Text;
             applicationName = savedmemo.applicationName;
+            Files = savedmemo.Files;
             /////////////////////////////
             MakeCheckBox();
             ShowLink();
@@ -90,6 +92,7 @@ namespace WindowsFormsApp
         public void SetLinkList(List<string> linkList) => LinkList = linkList;
         public void SetProgramList(List<string> programList) => ProgramList = programList;
         public void SetProcessList(List<ProcessInfo> processList) => ProcessList = processList;
+        public void SetFiles(List<string> files) => Files = files;
         public void AddFile(string path)
         {
             Files.Add(path);
@@ -203,6 +206,8 @@ namespace WindowsFormsApp
                 file = openFileDialog.SafeFileName;
                 fileFullPath = openFileDialog.FileName;
                 Files.Add(fileFullPath);
+                ProcessInfo doc = new ProcessInfo("file", fileFullPath);
+                AddProcess(doc);
                 fileName.Text = file;
             }
         }
