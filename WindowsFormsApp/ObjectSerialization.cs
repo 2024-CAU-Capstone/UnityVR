@@ -63,6 +63,7 @@ namespace WindowsFormsApp
                     MemoTime = memo.GetMemoTime(),
                     savePath = memo.BuildPath(),
                     saveProcessText = memo.applicationName,
+                    Files = memo.GetFiles()
                 };
                 MemoTemp.Add(memoObject);
             }
@@ -91,7 +92,8 @@ namespace WindowsFormsApp
                     time = schedule.time,
                     alarmTime = schedule.alarmTime,
                     savePath = schedule.BuildPath(),
-                    saveProcessText = schedule.applicationName
+                    saveProcessText = schedule.applicationName,
+                    Files = schedule.GetFiles()
                 };
                 ScheduleTemp.Add(scheduleObject);
             }
@@ -159,7 +161,7 @@ namespace WindowsFormsApp
                 newMemo.SetProcessList(memo.ProcessList);
                 newMemo.SetMemoTime(memo.MemoTime);
                 newMemo.SetIsMake(memo.IsMake);
-
+                newMemo.SetFiles(memo.Files);
                 startUI.AddMemo(newMemo);
             }
             foreach (var schedule in ScheduleTemp)
@@ -178,7 +180,7 @@ namespace WindowsFormsApp
                 newSchedule.time = schedule.time;
                 newSchedule.alarmTime = schedule.alarmTime;
                 newSchedule.SetIsMake(schedule.IsMake);
-
+                newSchedule.SetFiles(schedule.Files);
                 startUI.AddSchedule(newSchedule);
             }
         }
@@ -197,6 +199,7 @@ namespace WindowsFormsApp
             public DateTime MemoTime {  get; set; }
             public string savePath { get; set; }
             public string saveProcessText { get; set; }
+            public List<string> Files { get; set; }
         }
 
         [Serializable]
@@ -215,6 +218,7 @@ namespace WindowsFormsApp
             public int alarmTime { get; set; }
             public string savePath { get; set; }
             public string saveProcessText { get; set; }
+            public List<string> Files { get; set; }
 
         }
 

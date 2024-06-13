@@ -21,8 +21,8 @@ namespace WindowsFormsApp
             InitStartUI();
             hook = new KeyboardHook();
             hook.KeyPressed += new EventHandler<KeyPressedEventArgs>(hook_KeyPressed);
-            hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F12);
-            hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.F11);
+            hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.M);
+            hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_ALT, (uint)Keys.N);
             hook.RegisterHotKey(HOT_KEY_MODIFIERS.MOD_CONTROL | HOT_KEY_MODIFIERS.MOD_SHIFT, (uint)Keys.B);
             mailHandler = new MailHandler(this);
         }
@@ -218,13 +218,13 @@ namespace WindowsFormsApp
         #region Keyboard Shortcut Definition
         void hook_KeyPressed(object sender, KeyPressedEventArgs e)
         {
-            if (e.Key == (uint)Keys.F11)
+            if (e.Key == (uint)Keys.M)
             {
                 Memo memo = new Memo(this);
                 memo.Show();
                 PInvoke.ShowWindow(new HWND(this.Handle), SHOW_WINDOW_CMD.SW_MINIMIZE);
             }
-            else if (e.Key.ToString() == "F12")
+            else if (e.Key.ToString() == "N")
             {
                 Schedule schedule = new Schedule(this);
                 schedule.Show();
@@ -250,6 +250,12 @@ namespace WindowsFormsApp
         {
             MailLogin mailLogin = new MailLogin(this.mailHandler);
             mailLogin.Show();
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            ObjectSerialization objs = new ObjectSerialization(MemoList, ScheduleList);
+            objs.SaveData();
+            base.OnFormClosing(e);
         }
 
         public void RestartApplication()

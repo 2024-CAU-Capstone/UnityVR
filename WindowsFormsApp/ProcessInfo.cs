@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Appointments.DataProvider;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
+using System.IO;
 
 namespace WindowsFormsApp
 {
@@ -64,12 +65,35 @@ namespace WindowsFormsApp
                     processes.Add(p);
                     break;
                 case ProcessType.Explorer:
-                case ProcessType.Document:
                     p = new Process();
                     p.StartInfo = new ProcessStartInfo(_Path)
                     {
                         UseShellExecute = true,
                     };
+                    processes.Add(p);
+                    break;
+                case ProcessType.Document:
+                    p = new Process();
+                    if (File.Exists(_Path))
+                    {
+                        p.StartInfo = new ProcessStartInfo(_Path)
+                        {
+                            UseShellExecute = true,
+                        };
+                    } 
+                    else
+                    {
+                        string[] temp = _Path.Split("\\");
+                        string filename = temp[temp.Length - 1];
+                        string newpath = "SaveFiles\\" + filename;
+                        if (File.Exists(@".\" + newpath))
+                        {
+                            p.StartInfo = new ProcessStartInfo(@".\" + newpath)
+                            {
+                                UseShellExecute = true,
+                            };
+                        }
+                    }
                     processes.Add(p);
                     break;
                 case ProcessType.Url:

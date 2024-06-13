@@ -19,7 +19,8 @@ namespace WindowsFormsApp
 
                 foreach (InternetExplorer window in shell)
                 {
-                    string[] patharray = ((IShellFolderViewDual2)window.Document).FocusedItem.Path.ToString().Split("\\");
+                    IShellFolderViewDual2 doc = (IShellFolderViewDual2)window.Document;
+                    string[] patharray = doc.FocusedItem.Path.ToString().Split("\\");
                     patharray = patharray.Take(patharray.Count() - 1).ToArray();
                     ret.Add(string.Join("\\", patharray));
                 }
